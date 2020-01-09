@@ -30,7 +30,7 @@ import './Register.css'
          }
      }
  
-     registerUser = (event) => {
+     register = (event) => {
          if(this.state.first_name === null ||
              this.state.last_name === null ||
              this.state.email === null ||
@@ -120,13 +120,13 @@ import './Register.css'
                         <label className="text-field-input1">Password</label>
                         <input type="password" className="text-field1" id='password' onChange={this.saveValue}/>
                           </p>      
-                          <button className="primary-button1" type="submit" onClick={this.registerUser}>Register</button>
+                          <button className="primary-button1" type="submit" onClick={this.register}>Register</button>
                         </form>
                          </div>
                           
                                   
      <div className="additional-info1"><p>Or if you don't have an account,
-      <button onClick={this.props.registerAccount} className="register-login">Sign In</button>
+      <button onClick={this.props.registerDone} className="register-login">Sign In</button>
                          </p>
                                                   
                                                  

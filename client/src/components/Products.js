@@ -4,9 +4,9 @@ import React from "react";
 import axios from "axios";
 import {
   getItems,
+  deleteItem
+ } from "../redux/actions/itemsActions";
  
- 
-} from "../redux/actions/itemsActions";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import store from '../redux/store'
@@ -16,7 +16,7 @@ class Products extends React.Component {
   constructor() {
     super();
     this.state = {
-      showModal: null,
+      showModal: null
       
     };
   }
@@ -33,21 +33,38 @@ class Products extends React.Component {
     
     })
   }
-//   deleteItems=(_id)=>{
-//     this.setState({
-//       showModal:(
-//         <React.Fragment>
-// <h3>Delete Product</h3>
-//         <p>You are about to delete this product.Are you sure you wish to continue?</p>
-// <div className="alert-btn6">
-//             <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
-//             <button className="delete-btn6" onClick={() => this.props.deleteItem(_id)}>Delete</button>
-//         </div>
-//         </React.Fragment>
-//         )
-//     })
-//   }
-   
+  deleteItems=(_id)=>{
+         this.setState({
+           showModal:(
+         
+        axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
+                  { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
+                .then(res => {
+                 console.log(res);
+                 store.dispatch(deleteItem(_id))
+                  })
+                  .catch(err => {
+                 console.log(err);
+                  }
+           ))}
+          )
+           return  (     
+    
+       
+      <div>
+ <h3>Delete Product</h3>
+         <p>You are about to delete this product.Are you sure you wish to continue?</p>
+ <div className="alert-btn6">
+             <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
+            <button className="delete-btn6" onClick={() => this.props.deleteItems(_id)}>Delete</button>
+        </div>
+        </div>
+        ) }
+       
+       
+       
+         
+         
   render() {
      let itemsList = null;
     if (this.props.items) {
@@ -69,12 +86,12 @@ class Products extends React.Component {
               >
                 Edit
               </button>
-              <Link to='/deleteproduct'>
+             
               <button
                 id="delete"
-                className="btn btn-danger" onClick={this.toggle}
+                className="btn btn-danger" onClick={this.deleteItems}
                >Delete </button> 
-              </Link>
+              
             </td>
           </tr>
         );
@@ -130,6 +147,7 @@ function mapStateToProps(state) {
   return {
  
      getItems: data => dispatch(getItems(data)),
+     deleteItem:_id=>dispatch(deleteItem(_id))
     
    
   }; }

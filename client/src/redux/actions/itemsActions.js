@@ -12,10 +12,10 @@ export function getItems (data) {
     }
 }
 
-export function deleteItem(item) {
+export function deleteItem(_id) {
     return{
              type:"DELETE_ITEM",
-             payload:item
+             payload:_id
          
     }}
     export function Update (newState) {

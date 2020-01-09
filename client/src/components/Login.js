@@ -26,7 +26,7 @@ class Login extends React.Component {
         }
     }
 
-    logIn = (event) => {
+    login = (event) => {
         event.preventDefault();
         axios.post('http://127.0.0.1:8085/api/v1/auth/login', {
             email: this.state.email,
@@ -60,13 +60,13 @@ class Login extends React.Component {
                      <label className="text-field-input">Password</label>
                      <input type="password" className="text-field"  id='password' onChange={this.saveValue}/>
                  </p>
-                 <button className="primary-button" onClick={this.logIn}>Sign in</button>
+                 <button className="primary-button" onClick={this.login}>Sign in</button>
              </form>
        
 
           <div className="additional-info" >
                         <p>Or if you don't have an account, 
-                            <button onClick={this.props.registerAccount} >Register</button>
+                            <button onClick={this.props.registerDone} >Register</button>
                         </p>
                     </div>
                 </div>

@@ -33,33 +33,33 @@ class Products extends React.Component {
     
     })
   }
-  deleteItems=(_id)=>{
-         this.setState({
-           showModal:(
+//   deleteItems=(_id)=>{
+//          this.setState({
+//            showModal:(
          
-        axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
-                  { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
-                .then(res => {
-                 console.log(res);
-                 store.dispatch(deleteItem(_id))
-                  })
-                  .catch(err => {
-                 console.log(err);
-                  }
-           ))}
-          )
-           return  (     
+//         axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
+//                   { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
+//                 .then(res => {
+//                  console.log(res);
+//                  store.dispatch(deleteItem(_id))
+//                   })
+//                   .catch(err => {
+//                  console.log(err);
+//                   }
+//            ))}
+//           )
+//            return  (     
     
        
-      <div>
- <h3>Delete Product</h3>
-         <p>You are about to delete this product.Are you sure you wish to continue?</p>
- <div className="alert-btn6">
-             <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
-            <button className="delete-btn6" onClick={() => this.props.deleteItems(_id)}>Delete</button>
-        </div>
-        </div>
-        ) }
+//       <div>
+//  <h3>Delete Product</h3>
+//          <p>You are about to delete this product.Are you sure you wish to continue?</p>
+//  <div className="alert-btn6">
+//              <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
+//             <button className="delete-btn6" onClick={() => this.props.deleteItems(_id)}>Delete</button>
+//         </div>
+//         </div>
+//         ) }
        
        
        

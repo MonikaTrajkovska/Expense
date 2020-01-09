@@ -1,11 +1,10 @@
-const mUsers = require('../models/users');
+const mUsers = require('../models/User');
 const vUsers = require('../validators/users');
-var validator = require('node-input-validator');
+const validator = require('node-input-validator');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const config = require('../config/index.js');
-const randomstring = require('randomstring');
-const sgMail = require('@sendgrid/mail');
+
 
 const register = (req, res) => {
     var v = new validator.Validator(req.body, vUsers.createUser);
@@ -22,26 +21,7 @@ const register = (req, res) => {
                         throw new Error(err);
                         return;
                     }
-                    var confirm_hash = randomstring.generate({
-                        length: 30,
-                        charset: 'alphanumeric'
-                    });
-                    mUsers.createUser({
-                        ...req.body, 
-                        password: hash,
-                        confirm_hash: confirm_hash,
-                        confirmed: false
-                    });
-                    sgMail.setApiKey(config.getConfig('mailer').key);
-                    const msg = {
-                        to: req.body.email,
-                        from: 'bojang@gmail.com',
-                        subject: 'Thanks for registering',
-                        text: 'Thanks for registering',
-                        html: `<a href="http://localhost:8001/api/v1/confirm/${confirm_hash}">Click here to confirm your account</a>`,
-                    };
-                    sgMail.send(msg);
-                    return;
+                    return mUsers.createUser({...req.body, password: hash});
                 });
             });
         } else {
@@ -60,30 +40,39 @@ const register = (req, res) => {
 const login = (req, res) => {
     mUsers.getUserPasswordByEmail(req.body.email)
     .then((data) => {
-        bcrypt.compare(req.body.password, data.password, function(err, rez) {
+        bcrypt.compare(req.body.password, data.password, (err, result) => {
             if(err){
-                return res.status(500).send('Could not compare password');
+                return res.status(500).send('Could not compare passwords');
             }
-            if(rez){
+            if(result){
                 var tokenData = {
                     id: data._id,
-                    full_name: `${data.first_name} ${data.last_name}`,
+                     full_name: `${data.first_name} ${data.last_name}`,
                     email: data.email
                 };
                 var token = jwt.sign(tokenData, config.getConfig('jwt').key);
-                return res.status(200).send({jwt: token});
+                return res.status(200).send({jwt: token, first_name: data.first_name, last_name: data.last_name});
             }
-            return res.status(404).send('not found');
+            return res.status(400).send('not found');
         });
     })
     .catch(err => {
-        console.log(err);
         return res.status(500).send('Could not get user');
     });
-};
+}
+
+const userInfo = (req, res) => {
+    mUsers.getUserPasswordByEmail(req.params.email)
+    .then(data => {
+        res.status(200).send(data);
+    })
+    .catch(err => {
+        res.status(500).send(err);
+    });
+}
 
 const renew = (req, res) => {
-    return res.status(200).send(req.user.id);
+    return res.status(200).send(req.user);
 }
 
 const resetLink = (req, res) => {
@@ -98,23 +87,6 @@ const changePassword = (req, res) => {
     return res.status(200).send('ok');
 }
 
-const confirm = (req, res) => {
-    // koga nekoj kje klikne na 
-    // http://localhost:8001/api/v1/confirm/[CONFIRM_HASH]
-    // go nosi na ovoj handler
-    // go prezemate hash-ot
-    // proveruvate vo baza dali vakov hash postoi
-    // ako postoi na istiot record mu setirate
-    // confirmed: true
-    var hash = req.params.confirm_hash;
-    mUsers.confirmUserAccount(hash)
-    .then(() => {
-        return res.status(200).send('ok');
-    })
-    .catch((err) => {
-        return res.status(500).send('Internal Server Error');
-    })
-}
 
 module.exports = {
     register,
@@ -123,5 +95,5 @@ module.exports = {
     resetLink,
     resetPassword,
     changePassword,
-    confirm
+    userInfo
 }

@@ -1,0 +1,320 @@
+
+
+import React from "react";
+import axios from "axios";
+import {
+  getItems,
+ 
+ 
+} from "../redux/actions/itemsActions";
+import { connect } from "react-redux";
+import { Link } from 'react-router-dom'
+import store from '../redux/store'
+import './Products.css'
+
+class Products extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showModal: null,
+      
+    };
+  }
+  componentDidMount() {
+    axios.get("http://localhost:8084/api/v1/items",
+    { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
+    .then(res=>{
+        store.dispatch(getItems(res.data))
+        // console.log(res.data)
+      
+    })
+    .catch(err=>{
+        console.log(err)
+    
+    })
+  }
+//   deleteItems=(_id)=>{
+//     this.setState({
+//       showModal:(
+//         <React.Fragment>
+// <h3>Delete Product</h3>
+//         <p>You are about to delete this product.Are you sure you wish to continue?</p>
+// <div className="alert-btn6">
+//             <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
+//             <button className="delete-btn6" onClick={() => this.props.deleteItem(_id)}>Delete</button>
+//         </div>
+//         </React.Fragment>
+//         )
+//     })
+//   }
+   
+  render() {
+     let itemsList = null;
+    if (this.props.items) {
+    
+      itemsList = this.props.items.map(item => {
+        return (
+          
+            <tr key={item._id}>
+            <td>{item.product_name}</td>
+            <td>{item.product_type}</td>
+            <td>{item.product_description}</td>
+            <td>{item.purchase_date}</td>
+            <td>{item.product_price}</td>
+            <td>
+               <button
+                id="edit"
+                className="btn btn-light"
+                
+              >
+                Edit
+              </button>
+              <Link to='/deleteproduct'>
+              <button
+                id="delete"
+                className="btn btn-danger" onClick={this.toggle}
+               >Delete </button> 
+              </Link>
+            </td>
+          </tr>
+        );
+      });
+    }
+    return (
+      <React.Fragment>
+<div className="main-div5">
+
+<h3>Products</h3>
+<label>Filter by: 
+<select id="filter5">
+<option>Year</option>
+<option>Highest Price</option>
+<option>Lowest Price</option>
+<option>Latest Purchases</option>
+</select>
+</label>
+</div>
+
+      <table className="table table-dark">
+        {this.state.showModal}
+        <thead>
+          <tr>
+            
+            <th>Product name</th>
+            <th>Product type</th>
+            <th>Product description</th>
+            <th>Purchase date</th>
+            <th>Product price </th>
+            <th></th>
+            <th></th>
+          
+           
+          </tr>
+        </thead>
+        <tbody>{itemsList}</tbody>
+      </table>
+      <Link to="/newproduct">
+    <button className="fixed-button5" onClick={this.toggle}>New Product</button>
+    </Link>
+      </React.Fragment>
+    );
+  }
+}
+function mapStateToProps(state) {
+  return {
+    items: state.itemsReducer.items,
+   
+  };
+}
+ function mapDispatchToProps(dispatch) {
+  return {
+ 
+     getItems: data => dispatch(getItems(data)),
+    
+   
+  }; }
+export default connect(
+  mapStateToProps,
+   mapDispatchToProps
+)(Products);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react'
+// import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+// import './Products.css'
+
+// const Products = ()=> {
+//     return (
+//         <React.Fragment>
+//             <div className="main-div5">
+//   <h3>Products</h3>
+//   <label>Filter by: 
+//   <select id="filter5">
+//       <option>Year</option>
+//       <option>Highest Price</option>
+//       <option>Lowest Price</option>
+//       <option>Latest Purchases</option>
+//   </select>
+// </label>
+// </div>
+        
+        
+//         <table className="data5">
+//             <tbody>
+//           <tr>
+//             <th>Product name</th>
+//             <th>Product type</th>
+//             <th>Product description</th>
+//             <th>Purchase date</th>
+//             <th>Product price </th>
+//             <th></th>
+//             <th></th>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           <tr>
+//             <td>Coca-cola</td>
+//             <td>Drink</td>
+//             <td>Carbonated soft drink</td>
+//             <td>19.08.2018</td>
+//             <td>75</td>
+//             <td>
+//                     <a href=""><i className="far fa-edit"></i></a>
+//                     <a href=""><i className="far fa-trash-alt"></i></a>
+//                 </td>
+//           </tr>
+//           </tbody>
+//         </table>
+//         <button className="fixed-button5">New product</button>
+
+
+
+
+//         </React.Fragment>
+//     )
+// }
+// export default Products

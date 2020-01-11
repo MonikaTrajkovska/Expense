@@ -7,7 +7,8 @@ const init = config => {
     .connect(parseCString(config), {
      useNewUrlParser: true,
       useUnifiedTopology: true,
-     useCreateIndex:true
+     useCreateIndex:true,
+    //  useFindAndModify: false
     })
    .then(res => {
      // console.log(res);
@@ -17,6 +18,7 @@ const init = config => {
     });
 };
 const parseCString = config => {
+
  var cs = uri.replace("{username}", config.username);
   cs = cs.replace("{password}", config.password);
   cs = cs.replace("{host}", config.host);

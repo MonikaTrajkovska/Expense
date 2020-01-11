@@ -8,6 +8,7 @@ import Expenses from './components/Expenses'
 import Products from './components/Products'
 // import AppNavBar from './components/AppNavBar'
  import DeleteProduct from './components/DeleteProduct'
+ import UpdateProduct from './components/UpdateProduct'
 import {Provider} from 'react-redux'
  import store from './redux/store'
 
@@ -48,6 +49,7 @@ const Routes = () => {
 <Switch>
  <Route exact  path= '/' component={Login} />
 <Route  exact path='/Register' component={Register}/>
+<Route  exact path='/updateproduct' component={UpdateProduct}/>
    {/* <Route exact  path='/newproduct' component={NewProduct}/>  */}
   {/* <Route exact  path='/header' component={Header}/>   */} */}
   <Route exact path="/newproduct" render={() => 

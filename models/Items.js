@@ -35,6 +35,16 @@ const getAll = ()=>{
         })
     })
 }
+const getOne = (id, userID) => {
+    return new Promise((success, fail) => {
+        Item.find({ _id: id, user_id: userID }, (err, items) => {
+            if (err) {
+                return fail(err);
+            }
+            return success(items);
+        });
+    });
+};
 const save=(items)=>{
     return new Promise((success,fail)=>{
         var i=new Item(items)
@@ -46,9 +56,31 @@ const save=(items)=>{
         })
     })
 }
+const replace = (id, items) => {
+    return new Promise((success, fail) => {
+        Item.updateOne({_id:id} , items, err => {
+            if (err) {
+                return fail(err);
+            }
+            return success();
+        });
+    });
+}
+const update = (id, items) => {
+    return new Promise((success, fail) => {
+        Product.findByIdAndUpdate(id, {$set: {items}}, err => {
+            if(err){
+                return fail(err);
+            }
+            return success();
+        });
+    });
+};
+
+
 const remove = (id) => {
     return new Promise((success, fail) => {
-        Item.deleteOne({ _id: id }, err => {  
+        Item.deleteOne( {_id:id} , err => {  
             if (err) {
                 return fail(err);
             }
@@ -60,5 +92,8 @@ const remove = (id) => {
 module.exports={
     getAll,
     save,
-    remove
+    getOne,
+    remove,
+    replace,
+    update
 }

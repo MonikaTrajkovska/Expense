@@ -26,10 +26,10 @@ api.use(
 );
 
 api.get('/api/v1/items', items.getAll);
-// api.get('/api/v1/items/:id', items.getOne);
+ api.get('/api/v1/items/:id', items.getOne);
 api.post('/api/v1/items/', items.save);
-// api.put('/api/v1/items/:id', items.replace);
-// api.patch('/api/v1/items/:id', items.update);
+ api.put('/api/v1/items/:id', items.replace);
+ api.patch('/api/v1/items/:id', items.update);
 api.delete('/api/v1/items/:id', items.remove);
 
 api.listen(8084, err => {

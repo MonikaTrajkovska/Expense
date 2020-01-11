@@ -4,13 +4,17 @@ import React from "react";
 import axios from "axios";
 import {
   getItems,
-  deleteItem
+  editThisProduct,
+  changeNewToEditProduct
+  //  deleteItem
  } from "../redux/actions/itemsActions";
- 
+
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import store from '../redux/store'
 import './Products.css'
+
+// import { render } from "react-dom";
 
 class Products extends React.Component {
   constructor() {
@@ -33,36 +37,47 @@ class Products extends React.Component {
     
     })
   }
-//   deleteItems=(_id)=>{
-//          this.setState({
-//            showModal:(
-         
-//         axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
-//                   { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
-//                 .then(res => {
-//                  console.log(res);
-//                  store.dispatch(deleteItem(_id))
-//                   })
-//                   .catch(err => {
-//                  console.log(err);
-//                   }
-//            ))}
-//           )
-//            return  (     
+//   componentDidMount() {
+//     axios.delete(`http://localhost:8084/api/v1/items/${id}`,
+//     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
+//     .then(res=>{
+//         store.dispatch(getItems(res.data))
+//         // console.log(res.data)
+      
+//     })
+//     .catch(err=>{
+//         console.log(err)
     
-       
-//       <div>
-//  <h3>Delete Product</h3>
-//          <p>You are about to delete this product.Are you sure you wish to continue?</p>
-//  <div className="alert-btn6">
-//              <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
-//             <button className="delete-btn6" onClick={() => this.props.deleteItems(_id)}>Delete</button>
+//     })
+//   }
+//   deleteItems=(id)=>{
+//     this.setState({
+//       showModal:(
+//         <React.Fragment>
+// <h3>Delete Product</h3>
+//         <p>You are about to delete this product.Are you sure you wish to continue?</p>
+// <div className="alert-btn6">
+//             <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
+//             <button className="delete-btn6" onClick={() => this.props.deleteItem(id)}>Delete</button>
 //         </div>
-//         </div>
-//         ) }
-       
-       
-       
+
+//     </React.Fragment>
+//       )
+//     })
+//   }
+     
+sendEditItemToStore = () => {
+  store.dispatch(editThisProduct(
+     this.props._id,
+      this.props.product_name,
+      this.props.product_type,
+      this.props.product_description,
+      this.props.purchase_date,
+      this.props.product_price))
+  store.dispatch(changeNewToEditProduct(true))
+}
+
+        
          
          
   render() {
@@ -79,19 +94,22 @@ class Products extends React.Component {
             <td>{item.purchase_date}</td>
             <td>{item.product_price}</td>
             <td>
+
+              
+              <Link to='./updateproduct'>
                <button
                 id="edit"
                 className="btn btn-light"
-                
-              >
+                onClick={this.sendEditItemToStore}>
+              
                 Edit
               </button>
-             
+              </Link>
+             <Link to='/deleteproduct'>
               <button
                 id="delete"
-                className="btn btn-danger" onClick={this.deleteItems}
-               >Delete </button> 
-              
+                className="btn btn-danger"  onClick={this.toggle}>Delete </button> 
+              </Link>
             </td>
           </tr>
         );
@@ -140,14 +158,14 @@ class Products extends React.Component {
 function mapStateToProps(state) {
   return {
     items: state.itemsReducer.items,
-   
+    productToEdit: state.itemsReducer.productToEdit,
   };
 }
  function mapDispatchToProps(dispatch) {
   return {
  
      getItems: data => dispatch(getItems(data)),
-     deleteItem:_id=>dispatch(deleteItem(_id))
+      // deleteItem:id=>dispatch(deleteItem(id))
     
    
   }; }

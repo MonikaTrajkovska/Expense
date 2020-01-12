@@ -15,7 +15,7 @@ const getAll=(req,res)=>{
 }
 const getOne = (req, res) => {
     Item.getOne(req.params.id, req.user.id)
-    .then(items => {
+    .then(items=> {
         res.status(200).send(items);
     })
     .catch(err => {

@@ -5,55 +5,59 @@
 //     }
 // }
 
-export function getItems (data) {
+export function getItems (items) {
     return {
         type: 'GET_ITEMS',
-        payload: data
+        payload: items
     }
 }
 
- export function deleteItem(id) {
-     return{
-              type:"DELETE_ITEM",
-             payload:id
+//  export function deleteItem(id) {
+//      return{
+//               type:"DELETE_ITEM",
+//              payload:id
          
-     }}
+//      }}
 
  
  
 
     export function Update (newState) {
-        return {
+         return {
             type: 'DID_UPDATE',
-            state: newState
-        }
-    }
+             state: newState
+         }
+     }
     
+
     export function changeNewToEditProduct (newState) {
                  return {
              type: 'CHANGE_NEW_TO_EDIT',
              state: newState
         }
      }
-     export function editThisProduct 
- (_id, product_name, product_type, product_description, purchase_date, product_price) {
-     return {
-         type: 'EDIT_THIS_PRODUCT',
+     export function editThisProduct  (id, product_name, product_type, product_description, purchase_date, product_price) {
+      return {
+          type: 'EDIT_THIS_PRODUCT',
          payload: {
-             _id, product_name, product_type, product_description, purchase_date, product_price
-         }
-     }}
-// export const editProduct = (items, newProduct) => {
-//     return {
-//         type: "EDIT_PRODUCT",
-//         items,
-//         newProduct
-//     }
-// }
+              id, 
+              product_name,
+               product_type, 
+               product_description, 
+               purchase_date, 
+               product_price
+          }
+      }}
+      export const updateItem=(item)=>{
+          return{
+              type:'UPDATE_ITEM',
+                payload:item
+          }
+      }
+     
 
-// export const newProduct = (newProduct) => {
-//     return {
-//         type: "CHANGE_NEW_TO_EDIT",
-//         newProduct
-//     }
-// }
+
+//  export const newProduct = (newProduct) => {
+//       return {
+//           type: "CHANGE_NEW_TO_EDIT",
+//           newProduct     } }

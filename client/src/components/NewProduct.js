@@ -14,11 +14,11 @@ class NewProduct extends React.Component {
         super(props)
         this.state = {
             newProduct: this.props.newProduct,
-            product_name: this.props.newProduct === null,
-           product_type: this.props.newProduct === null,
-            product_description: this.props.newProduct === null,
-            purchase_date: this.props.newProduct === null,
-            product_price: this.props.newProduct === null
+            product_name: this.props.product_name === '',
+           product_type: this.props.newProduct === '',
+            product_description: this.props.newProduct === '',
+            purchase_date: this.props.newProduct === '',
+            product_price: this.props.newProduct === ''
         }
     }
 
@@ -76,7 +76,7 @@ class NewProduct extends React.Component {
                                     <input type="text" className="text-field2"
                                     id='product_name'
                                     onChange={this.save}
-                                    defaultValue={this.state.newProduct} />
+                                    defaultValue={this.state.product_name} />
                                 </p>
                                 <p className="input-container2">
                                     <label className="text-field-input2">Product Type</label> <br/>

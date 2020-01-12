@@ -4,32 +4,16 @@ var User=mongoose.model(
        
             'users',
             new mongoose.Schema({
-            first_name:{
-                type:String,
-                require:true,
-               
-            },
-            last_name:{
-                type:String,
-                require:true},
-            email:{
-                type:String,
-                require:true,
-                unique:true
-            },
-          date_birth:{
-                type:Date,
-                default:Date.now
-            },
-           telephone:{
-                type:String,
-                require:true},
-       country:{
-                    type:String,
-                    require:true},
-         password:{
-                        type:String,
-                        require:true}    
+            first_name:String,
+            last_name:String,
+        
+            email:String,
+          date_birth:Date,
+           telephone:String,
+       country:String,
+         password:String,
+         _created:Date,
+         _modified:Date   
         })
     )
 

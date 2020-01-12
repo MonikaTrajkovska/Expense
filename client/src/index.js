@@ -10,6 +10,7 @@ import Products from './components/Products'
  import DeleteProduct from './components/DeleteProduct'
  import UpdateProduct from './components/UpdateProduct'
 import {Provider} from 'react-redux'
+import edit from './components/edit'
  import store from './redux/store'
 
 
@@ -50,7 +51,7 @@ const Routes = () => {
  <Route exact  path= '/' component={Login} />
 <Route  exact path='/Register' component={Register}/>
 <Route  exact path='/updateproduct' component={UpdateProduct}/>
-   {/* <Route exact  path='/newproduct' component={NewProduct}/>  */}
+ <Route exact  path='/edit' component={edit}/>  */}
   {/* <Route exact  path='/header' component={Header}/>   */} */}
   <Route exact path="/newproduct" render={() => 
                     <React.Fragment>

@@ -5,7 +5,10 @@ import axios from "axios";
 import {
   getItems,
   editThisProduct,
-  changeNewToEditProduct
+  changeNewToEditProduct,
+
+ 
+ 
   //  deleteItem
  } from "../redux/actions/itemsActions";
 
@@ -17,10 +20,11 @@ import './Products.css'
 // import { render } from "react-dom";
 
 class Products extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      showModal: null
+      showModal: null,
+     
       
     };
   }
@@ -65,20 +69,33 @@ class Products extends React.Component {
 //       )
 //     })
 //   }
-     
-sendEditItemToStore = () => {
-  store.dispatch(editThisProduct(
-     this.props._id,
-      this.props.product_name,
-      this.props.product_type,
-      this.props.product_description,
-      this.props.purchase_date,
-      this.props.product_price))
-  store.dispatch(changeNewToEditProduct(true))
-}
 
-        
-         
+sendDeleteIdToStore = () => {
+  store.dispatch(editThisProduct(this.props.id))
+ 
+} 
+
+
+
+sendEditItemToStore = () => {
+    store.dispatch(editThisProduct(
+      this.props.id,
+        this.props.product_name,
+       this.props.product_type,
+        this.props.product_description,
+        this.props.purchase_date,
+      this.props.product_price))
+    store.dispatch(changeNewToEditProduct(true))
+   
+  }
+// edit(e){
+//   var id=e.target.getAttribute('data-key')
+//   store.dispatch({
+//     type:"UPDATE_ITEM",
+//     id:id
+//   })
+//   // this.props.history.push('/edit/'+id)
+// }
          
   render() {
      let itemsList = null;
@@ -87,24 +104,24 @@ sendEditItemToStore = () => {
       itemsList = this.props.items.map(item => {
         return (
           
-            <tr key={item._id}>
+            <tr key={item.id}>
             <td>{item.product_name}</td>
             <td>{item.product_type}</td>
             <td>{item.product_description}</td>
             <td>{item.purchase_date}</td>
             <td>{item.product_price}</td>
             <td>
-
-              
-              <Link to='./updateproduct'>
+           
+             <Link to="/updateproduct">
                <button
                 id="edit"
                 className="btn btn-light"
+                
                 onClick={this.sendEditItemToStore}>
               
                 Edit
               </button>
-              </Link>
+              </Link> 
              <Link to='/deleteproduct'>
               <button
                 id="delete"
@@ -158,7 +175,8 @@ sendEditItemToStore = () => {
 function mapStateToProps(state) {
   return {
     items: state.itemsReducer.items,
-    productToEdit: state.itemsReducer.productToEdit,
+    // Update: state.itemsReducer.Update,
+    //  productToEdit: state.itemsReducer.productToEdit,
   };
 }
  function mapDispatchToProps(dispatch) {
@@ -166,7 +184,7 @@ function mapStateToProps(state) {
  
      getItems: data => dispatch(getItems(data)),
       // deleteItem:id=>dispatch(deleteItem(id))
-    
+
    
   }; }
 export default connect(

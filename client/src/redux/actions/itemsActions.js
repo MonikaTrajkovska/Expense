@@ -48,12 +48,12 @@ export function getItems (items) {
                product_price
           }
       }}
-      export const updateItem=(item)=>{
-          return{
-              type:'UPDATE_ITEM',
-                payload:item
-          }
-      }
+    //   export const updateItem=(items)=>{
+    //       return{
+    //           type:'UPDATE_ITEM',
+    //             payload:items
+    //       }
+    //   }
      
 
 

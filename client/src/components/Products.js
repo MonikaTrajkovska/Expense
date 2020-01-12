@@ -104,7 +104,7 @@ sendEditItemToStore = () => {
       itemsList = this.props.items.map(item => {
         return (
           
-            <tr key={item.id}>
+            <tr key={item._id}>
             <td>{item.product_name}</td>
             <td>{item.product_type}</td>
             <td>{item.product_description}</td>

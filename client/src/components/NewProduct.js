@@ -33,7 +33,7 @@ class NewProduct extends React.Component {
             this.state.purchase_date === null ||
             this.state.product_price === null){
                 event.preventDefault()
-                alert('Please fill out all the fields')
+                alert('You missed some fileds')
         } else if( this.state.product_name != null &&
             this.state.product_type != null &&
             this.state.product_description != null &&

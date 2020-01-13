@@ -2,7 +2,7 @@ const initialUserState = {
     items: [],
     newProduct: false,
     Update: false,
-    productToEdit: '',
+    editItems: [],
    
     
 }
@@ -28,12 +28,12 @@ export function itemsReducer (state = initialUserState, action) {
             //     })
             //     return { ...state, items: newItems }
             // }
-            case 'EDIT_THIS_PRODUCT' : {
+            case 'EDIT_ITEMS' : {
                  return {
                   ...state,
-                      productToEdit: 
+                     editItems: 
                          [{
-                             id: action.payload.id,
+                             _id: action.payload._id,
                          product_name: action.payload.product_name,
                          product_type: action.payload.product_type,
                           product_description: action.payload.product_description,
@@ -66,14 +66,14 @@ export function itemsReducer (state = initialUserState, action) {
  
         //          items:items
         //         }
-                 case 'DID_UPDATE' : {
+                 case 'UPDATE' : {
                      return {
                          ...state,
                          Update: action.state
                      }
                  }
                 
-                case 'CHANGE_NEW_TO_EDIT' : {
+                case 'NEW_ITEM' : {
                     return {
                         ...state,
                         newProduct: action.state

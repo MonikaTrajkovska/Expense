@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+
 import axios from 'axios'
 import './Login.css'
 import './Shared.css'
@@ -12,7 +12,7 @@ class Login extends React.Component {
         this.state = {
             email: null,
             password: null,
-            redirect: false
+           
         }
     }
 
@@ -20,11 +20,7 @@ class Login extends React.Component {
         this.setState({[event.target.id]: event.target.value})
     }
 
-    renderRedirect = () => {
-        if (this.state.redirect) {
-            return <Redirect to='/products' />
-        }
-    }
+ 
 
     login = (event) => {
         event.preventDefault();
@@ -36,7 +32,7 @@ class Login extends React.Component {
             localStorage.setItem('jwt', res.data.jwt);
             localStorage.setItem('name', res.data.first_name);
             localStorage.setItem('lastName', res.data.last_name);
-            this.setState({redirect: true});
+        
           
         })
        
@@ -48,7 +44,7 @@ class Login extends React.Component {
     render () {
         return (
             <React.Fragment>
-                {this.renderRedirect()}
+              
                 <div id="login">
             <div className="box-container">
              <form>

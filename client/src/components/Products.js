@@ -4,14 +4,9 @@ import React from "react";
 import axios from "axios";
 import {
   getItems,
-  editThisProduct,
-  changeNewToEditProduct,
+  editOneItem,
 
- 
- 
-  //  deleteItem
  } from "../redux/actions/itemsActions";
-
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import store from '../redux/store'
@@ -24,10 +19,10 @@ class Products extends React.Component {
     super(props);
     this.state = {
       showModal: null,
-     
-      
+         
     };
   }
+
   componentDidMount() {
     axios.get("http://localhost:8084/api/v1/items",
     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
@@ -70,22 +65,17 @@ class Products extends React.Component {
 //     })
 //   }
 
-sendDeleteIdToStore = () => {
-  store.dispatch(editThisProduct(this.props.id))
- 
-} 
 
 
-
-sendEditItemToStore = () => {
-    store.dispatch(editThisProduct(
-      this.props.id,
+doneEdit = (_id) => {
+    store.dispatch(editOneItem(
+      this.props._id,
         this.props.product_name,
        this.props.product_type,
         this.props.product_description,
         this.props.purchase_date,
       this.props.product_price))
-    store.dispatch(changeNewToEditProduct(true))
+    
    
   }
 // edit(e){
@@ -100,9 +90,9 @@ sendEditItemToStore = () => {
   render() {
      let itemsList = null;
     if (this.props.items) {
-    
-      itemsList = this.props.items.map(item => {
-        return (
+     itemsList = this.props.items.map(item => {
+       
+      return (
           
             <tr key={item._id}>
             <td>{item.product_name}</td>
@@ -113,19 +103,12 @@ sendEditItemToStore = () => {
             <td>
            
              <Link to="/updateproduct">
-               <button
-                id="edit"
-                className="btn btn-light"
-                
-                onClick={this.sendEditItemToStore}>
-              
-                Edit
-              </button>
+               <button  id="edit" className="btn btn-light"
+               onClick={this.doneEdit}> Edit </button>
               </Link> 
-             <Link to='/deleteproduct'>
-              <button
-                id="delete"
-                className="btn btn-danger"  onClick={this.toggle}>Delete </button> 
+            
+             <Link to='/deleteproduct'> 
+             <button id="delete" className="btn btn-danger"  onClick={this.toggle}> Delete </button> 
               </Link>
             </td>
           </tr>
@@ -175,8 +158,7 @@ sendEditItemToStore = () => {
 function mapStateToProps(state) {
   return {
     items: state.itemsReducer.items,
-    // Update: state.itemsReducer.Update,
-    //  productToEdit: state.itemsReducer.productToEdit,
+    
   };
 }
  function mapDispatchToProps(dispatch) {

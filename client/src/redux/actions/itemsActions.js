@@ -1,9 +1,3 @@
-// export function getJwt (data) {
-//     return {
-//         type: 'GET_JWT',
-//         payload: data
-//     }
-// }
 
 export function getItems (items) {
     return {
@@ -22,25 +16,26 @@ export function getItems (items) {
  
  
 
-    export function Update (newState) {
+    export function Update (item) {
          return {
-            type: 'DID_UPDATE',
-             state: newState
+            type: 'UPDATE',
+             state: item
          }
      }
     
 
-    export function changeNewToEditProduct (newState) {
+    export function newItem (item) {
                  return {
-             type: 'CHANGE_NEW_TO_EDIT',
-             state: newState
+             type: 'NEW_ITEM',
+             state: item
         }
      }
-     export function editThisProduct  (id, product_name, product_type, product_description, purchase_date, product_price) {
+     export function editOneItem  
+     (_id, product_name, product_type, product_description, purchase_date, product_price) {
       return {
-          type: 'EDIT_THIS_PRODUCT',
+          type: 'EDIT_ITEMS',
          payload: {
-              id, 
+               _id, 
               product_name,
                product_type, 
                product_description, 
@@ -48,16 +43,4 @@ export function getItems (items) {
                product_price
           }
       }}
-    //   export const updateItem=(items)=>{
-    //       return{
-    //           type:'UPDATE_ITEM',
-    //             payload:items
-    //       }
-    //   }
-     
-
-
-//  export const newProduct = (newProduct) => {
-//       return {
-//           type: "CHANGE_NEW_TO_EDIT",
-//           newProduct     } }
+   

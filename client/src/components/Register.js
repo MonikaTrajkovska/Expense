@@ -1,7 +1,7 @@
 import React from 'react'
 import './Register.css'
 
- import { Redirect } from 'react-router-dom'
+
  import axios from 'axios'
  
  
@@ -16,7 +16,7 @@ import './Register.css'
              telephone: null,
              country: null,
              password: null,
-             redirect: false
+            
          }
      }
  
@@ -24,11 +24,7 @@ import './Register.css'
          this.setState({[event.target.id]: event.target.value})
      }
  
-     renderRedirect = () => {
-         if (this.state.redirect) {
-             return <Redirect to='/products' />
-         }
-     }
+  
  
      register = (event) => {
          if(this.state.first_name === null ||
@@ -40,7 +36,7 @@ import './Register.css'
              this.state.password === null
               ){
                  event.preventDefault()
-                 alert('Please fill out ')
+                 alert('Please fill  all the fields  ')
          } 
          else if (this.state.first_name != null &&
              this.state.last_name != null &&
@@ -71,7 +67,7 @@ import './Register.css'
                      localStorage.setItem('jwt', res.data.jwt);
                      localStorage.setItem('name', this.state.first_name);
                      localStorage.setItem('lastName', this.state.last_name);
-                     this.setState({redirect: true});
+                    
                   
                  })
                  .catch(err=>{
@@ -87,7 +83,7 @@ import './Register.css'
      render () {
          return (
              <React.Fragment>
-                 {this.renderRedirect()}
+                 
                  <div className="login1">
                    <div className="box-container1">
                      <form>

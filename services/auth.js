@@ -11,21 +11,21 @@ DBCon.init(config.getConfig('db'));
 var api = express();
 api.use(bodyParser.json());
 api.use(cors());
- api.use(function (req, res, next) {
+api.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
-     next();
- });
-api.use(
-    jwt({ 
-        secret: config.getConfig('jwt').key
-    })
-    .unless({
-        path: ['/api/v1/auth/register', '/api/v1/auth/login']
-    })
-);
+    next();
+});
+// api.use(
+//     jwt({
+//         secret: config.getConfig('jwt').key
+//     })
+//         .unless({
+//             path: ['/api/v1/auth/register', '/api/v1/auth/login']
+//         })
+// );
 
 api.post('/api/v1/auth/register', auth.register);
 api.post('/api/v1/auth/login', auth.login);
@@ -37,7 +37,7 @@ api.post('/api/v1/auth/change-password', auth.changePassword);
 
 
 api.listen(8085, err => {
-    if(err){
+    if (err) {
         console.log('Could not start server');
         console.log(err);
         return

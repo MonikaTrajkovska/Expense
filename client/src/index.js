@@ -1,23 +1,21 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
+import { Provider } from 'react-redux'
 import Register from './components/Register'
 import Login from './components/Login'
 import NewProduct from './components/NewProduct'
 import Header from './components/Header'
 import Expenses from './components/Expenses'
 import Products from './components/Products'
-// import AppNavBar from './components/AppNavBar'
- import DeleteProduct from './components/DeleteProduct'
- import UpdateProduct from './components/UpdateProduct'
-import {Provider} from 'react-redux'
+import DeleteProduct from './components/DeleteProduct'
+import UpdateProduct from './components/UpdateProduct'
 import edit from './components/edit'
- import store from './redux/store'
+import store from './redux/store'
+// import AppNavBar from './components/AppNavBar'
 
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-
- import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
-const app= document.getElementById('root')
+const app = document.getElementById('root')
 // const Menu =() => {
 //      return (
 //         <ul>
@@ -45,53 +43,45 @@ const app= document.getElementById('root')
 
 const Routes = () => {
     return (
-<Router>
- {/* <AppNavBar/>  */}
-<Switch>
- <Route exact  path= '/' component={Login} />
-<Route  exact path='/Register' component={Register}/>
-<Route  exact path='/updateproduct' component={UpdateProduct}/>
- <Route exact  path='/edit' component={edit}/>  */}
-  {/* <Route exact  path='/header' component={Header}/>   */} */}
-  <Route exact path="/newproduct" render={() => 
-                    <React.Fragment>
-                        <Header/>
-                        <NewProduct/>
-                    </React.Fragment>
-                }/>
-
-<Route exact path="/expenses" render={() => 
-                        <React.Fragment>
-                            <Header/>
-                            <Expenses/>
-                            
-                        </React.Fragment>
-                    }/> 
-              <Route exact path="/products" render={() => 
-                        <React.Fragment>
-                            <Header/>
-                            <Products/>
-                            
-                        </React.Fragment>
-                    }/>   
-             <Route exact path="/deleteproduct" render={() => 
-                        <React.Fragment>
-                          
-                            <DeleteProduct/>
-                            
-                        </React.Fragment>
-                    }/>                  
-{/* <Route exact path='/login' component={Login}/> */}
-
-</Switch>
-</Router>
-
-
-
+        <Router>
+            {/* <AppNavBar/>  */}
+            <Switch>
+                <Route exact path='/' component={Login} />
+                <Route exact path='/Register' component={Register} />
+                <Route exact path='/updateproduct/:id' component={UpdateProduct} />
+                {/* <Route exact path='/edit' component={edit} /> */}
+                {/* <Route exact  path='/header' component={Header}/>   */} */}
+                <Route exact path="/newproduct" render={() =>
+                    <>
+                        <Header />
+                        <NewProduct />
+                    </>
+                } />
+                <Route exact path="/expenses" render={() =>
+                    <>
+                        <Header />
+                        <Expenses />
+                    </>
+                } />
+                <Route exact path="/products" render={() =>
+                    <>
+                        <Header />
+                        <Products />
+                    </>
+                } />
+                <Route exact path="/deleteproduct" render={() =>
+                    <>
+                        <DeleteProduct />
+                    </>
+                } />
+                {/* <Route exact path='/login' component={Login}/> */}
+            </Switch>
+        </Router>
     )
 }
 
 ReactDOM.render(
     <Provider store={store}>
-        <Routes/>
-    </Provider>, app)
+        <Routes />
+    </Provider>, app
+)

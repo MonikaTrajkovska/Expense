@@ -6,12 +6,12 @@ export function getItems(items) {
     }
 }
 
-//  export function deleteItem(id) {
-//      return{
-//               type:"DELETE_ITEM",
-//              payload:id
+ export function deleteItem(_id) {
+     return{
+              type:"DELETE_ITEM",
+                            payload:_id
 
-//      }}
+      }}
 
 export function Update(item) {
     return {

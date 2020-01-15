@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import store from '../redux/store'
 import './Products.css'
+import { render } from "react-dom";
 
 // import { render } from "react-dom";
 
@@ -32,48 +33,50 @@ class Products extends React.Component {
       .catch(err => {
         console.log(err);
       })
-  }
-  //   componentDidMount() {
-  //     axios.delete(`http://localhost:8084/api/v1/items/${id}`,
-  //     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
-  //     .then(res=>{
-  //         store.dispatch(getItems(res.data))
-  //         // console.log(res.data)
-
-  //     })
-  //     .catch(err=>{
-  //         console.log(err)
-
-  //     })
-  //   }
-  //   deleteItems=(id)=>{
-  //     this.setState({
-  //       showModal:(
-  //         <React.Fragment>
-  // <h3>Delete Product</h3>
-  //         <p>You are about to delete this product.Are you sure you wish to continue?</p>
-  // <div className="alert-btn6">
-  //             <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
-  //             <button className="delete-btn6" onClick={() => this.props.deleteItem(id)}>Delete</button>
-  //         </div>
-
-  //     </React.Fragment>
-  //       )
-  //     })
-  //   }
+    }
 
 
+// componentDidMount(){
+    
+//        axios.delete(`http://localhost:8084/api/v1/items/${id}`,
+//       { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
+//       .then(res=>{
+//           store.dispatch(deleteItem(_id))
+//            // console.log(res.data)
 
-productDeleted = (_id) => {  
-  var item = this.props.items.filter((v, i) => {
-  if (v._id === _id) {
-    return v;
-  }
-  return
-})
+//       })
+//        .catch(err=>{
+//           console.log(err)
 
-this.props.editOneItem(item[0]._id)
-}
+//       })
+//     }
+//   return (
+//     <React.Fragment>
+      
+//               <div className="modal6">
+        
+//           <h3>Delete Product</h3>
+//          <p>You are about to delete this product.Are you sure you wish to continue?</p>
+//            <div className="alert-btn6">
+//               <button className="cancel-btn6">Cancel</button>
+//             <button className="delete-btn6">Delete</button>
+//         </div>
+//       </div>       >
+//     </React.Fragment>
+//     )
+//          })
+//        }
+
+// productDeleted = (_id) => {  
+//   var item = this.props.items.filter((v, i) => {
+//   if (v._id === _id) {
+//     return v;
+//   }
+//   return
+// })
+
+// this.props.editOneItem(item[0]._id)
+// }
 
   doneEdit = (_id) => {
     // alert('TEST');

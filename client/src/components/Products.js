@@ -64,6 +64,17 @@ class Products extends React.Component {
 
 
 
+productDeleted = (_id) => {  
+  var item = this.props.items.filter((v, i) => {
+  if (v._id === _id) {
+    return v;
+  }
+  return
+})
+
+this.props.editOneItem(item[0]._id)
+}
+
   doneEdit = (_id) => {
     // alert('TEST');
     // console.log(this.props);
@@ -77,17 +88,19 @@ class Products extends React.Component {
     // console.log('***************************************');
 
     var item = this.props.items.filter((v, i) => {
-      if (v._id == _id) {
+      if (v._id === _id) {
         return v;
       }
+      return
     })
 
     // console.log(item[0]);
 
     // store.dispatch(
+     
     this.props.editOneItem(item[0]._id, item[0].product_name, item[0].product_type, item[0].product_description, item[0].purchase_date, item[0].product_price);
     // store.dispatch(true)
-  }
+      }
   // edit(e){
   //   var id=e.target.getAttribute('data-key')
   //   store.dispatch({
@@ -117,7 +130,7 @@ class Products extends React.Component {
               </Link>
 
               <Link to='/deleteproduct'>
-                <button id="delete" className="btn btn-danger" onClick={this.toggle}> Delete </button>
+                <button id="delete" className="btn btn-danger" onClick={()=>{this.productDeleted(item._id)}}> Delete </button>
               </Link>
             </td>
           </tr >
@@ -164,6 +177,10 @@ class Products extends React.Component {
     );
   }
 }
+Products.propTypes = {
+  items: React.PropTypes.array.isRequired
+}
+
 function mapStateToProps(state) {
   return {
     items: state.itemsReducer.items,

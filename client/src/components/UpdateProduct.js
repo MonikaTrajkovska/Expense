@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-import store from '../redux/store'
+// import store from '../redux/store'
 import { Update, newItem, editOneItem } from '../redux/actions/itemsActions'
 
 import './New product.css'
@@ -13,12 +13,13 @@ class UpdateProduct extends React.Component {
         console.log(this.props);
 
         this.state = {
-            _id: this.props.editItems._id,
-            product_name: this.state.editItems.product_name,
-            product_type: this.state.editItems.product_type,
-            product_description: this.state.editItems.product_description,
-            purchase_date: this.state.editItems.purchase_date,
-            product_price: this.state.editItems.product_price,
+            editItems:this.props.editItems,
+             _id: this.props._id,
+            product_name: this.props.product_name,
+            product_type: this.props.product_type,
+            product_description: this.props.product_description,
+            purchase_date: this.props.purchase_date,
+            product_price: this.props.product_price,
         }
     }
 
@@ -75,35 +76,35 @@ class UpdateProduct extends React.Component {
                                 <input type="text" className="text-field2"
                                     id='product_name'
                                     onChange={this.save}
-                                    defaultValue={this.props.editItems.product_name} />
+                                    defaultValue={this.props.editItems} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Product Type</label> <br />
                                 <input type="text" className="text-field2"
                                     id='product_type'
                                     onChange={this.save}
-                                    defaultValue={this.props.editItems.product_type} />
+                                    defaultValue={this.props.editItems} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Product Description</label> <br />
                                 <input type="text" className="text-field2"
                                     id='product_description'
                                     onChange={this.save}
-                                    defaultValue={this.props.editItems.product_description} />
+                                    defaultValue={this.props.editItems} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Purchase Date</label> <br />
                                 <input type="date" className="text-field2"
                                     id='purchase_date'
                                     onChange={this.save}
-                                    defaultValue={this.props.editItems.purchase_date} />
+                                    defaultValue={this.props.editItems} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Product Price</label> <br />
                                 <input type="text" className="text-field2"
                                     id='product_price'
                                     onChange={this.save}
-                                    defaultValue={this.props.product_price} />
+                                    defaultValue={this.props.editItems} />
                             </p>
 
 

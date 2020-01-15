@@ -19,11 +19,11 @@ api.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
     next();
 });
-// api.use(
-//     jwt({
-//         secret: config.getConfig('jwt').key
-//     })
-// );
+ api.use(
+    jwt({
+        secret: config.getConfig('jwt').key
+     })
+ );
 
 api.get('/api/v1/items', items.getAll);
 api.get('/api/v1/items/:id', items.getOne);

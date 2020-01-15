@@ -9,7 +9,7 @@ import Expenses from './components/Expenses'
 import Products from './components/Products'
 import DeleteProduct from './components/DeleteProduct'
 import UpdateProduct from './components/UpdateProduct'
-import edit from './components/edit'
+
 import store from './redux/store'
 // import AppNavBar from './components/AppNavBar'
 
@@ -69,11 +69,9 @@ const Routes = () => {
                         <Products />
                     </>
                 } />
-                <Route exact path="/deleteproduct" render={() =>
-                    <>
-                        <DeleteProduct />
-                    </>
-                } />
+                <Route exact path="/deleteproduct/:id" component={DeleteProduct}/>
+                  
+              
                 {/* <Route exact path='/login' component={Login}/> */}
             </Switch>
         </Router>

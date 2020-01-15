@@ -18,14 +18,14 @@ api.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
     next();
 });
-// api.use(
-//     jwt({
-//         secret: config.getConfig('jwt').key
-//     })
-//         .unless({
-//             path: ['/api/v1/auth/register', '/api/v1/auth/login']
-//         })
-// );
+api.use(
+     jwt({
+        secret: config.getConfig('jwt').key
+     })
+         .unless({
+            path: ['/api/v1/auth/register', '/api/v1/auth/login']
+         })
+ );
 
 api.post('/api/v1/auth/register', auth.register);
 api.post('/api/v1/auth/login', auth.login);

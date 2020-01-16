@@ -87,7 +87,7 @@ const update = (id, items) => {
 
 const remove = (id) => {
     return new Promise((success, fail) => {
-        Item.findByIdAndRemove( {id} , err => {  
+        Item.findByIdAndRemove( {_id:id} , err => {  
             if (err) {
                 return fail(err);
             }

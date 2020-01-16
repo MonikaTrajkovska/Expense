@@ -5,13 +5,18 @@ export function getItems(items) {
         payload: items
     }
 }
-
- export function deleteItem(_id) {
-     return{
-              type:"DELETE_ITEM",
-                            payload:_id
-
-      }}
+// export function removeItemsToStore(items) {
+//     return {
+//       type: "DELETE_ITEM",
+//       payload: items
+//     };
+//   }
+ export const deleteItem = (_id) => {
+     return {
+        type: "DELETE_ITEM",
+         payload: _id
+     }
+}
 
 export function Update(item) {
     return {

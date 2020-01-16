@@ -69,7 +69,7 @@ const Routes = () => {
                         <Products />
                     </>
                 } />
-                <Route exact path="/deleteproduct/:id" component={DeleteProduct}/>
+                <Route exact path="/deleteproduct/" component={DeleteProduct}/>
                   
               
                 {/* <Route exact path='/login' component={Login}/> */}

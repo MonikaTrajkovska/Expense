@@ -5,13 +5,14 @@ import axios from "axios";
 import {
   getItems,
   editOneItem,
+deleteItem
 
 } from "../redux/actions/itemsActions";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import store from '../redux/store'
 import './Products.css'
-import { render } from "react-dom";
+import PropTypes from 'prop-types';
 
 // import { render } from "react-dom";
 
@@ -20,6 +21,8 @@ class Products extends React.Component {
     super(props);
     this.state = {
       showModal: null,
+      item:[],
+      alertShow:false
 
     };
   }
@@ -78,6 +81,47 @@ class Products extends React.Component {
 // this.props.editOneItem(item[0]._id)
 // }
 
+// delete=(_id)=>{
+//   var item=this.props.filter((v,i)=>{
+//     if(v._id===_id){
+//       return v
+//     }
+//     return
+//   })
+  
+//   this.props.deleteItem(item._id)
+// }
+ onDeleteClick = _id => {
+     axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
+               {
+                  headers: {
+                       'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+                   }
+               })
+               .then(res => {
+                  console.log(res)
+                   store.dispatch(deleteItem(_id))
+               })
+               .catch(err => {
+                   console.log(err)
+               
+               
+               return (
+                    <React.Fragment>
+                      
+                               <div className="modal6">
+                        
+                          <h3>Delete Product</h3>
+                         <p>You are about to delete this product.Are you sure you wish to continue?</p>
+                           <div className="alert-btn6">
+                             <button className="cancel-btn6">Cancel</button>
+                             <button className="delete-btn6">Delete</button>
+                       </div>
+                       </div>     
+                     </React.Fragment>
+                    )
+               }     
+               )}               
   doneEdit = (_id) => {
     // alert('TEST');
     // console.log(this.props);
@@ -113,15 +157,18 @@ class Products extends React.Component {
   //   // this.props.history.push('/edit/'+id)
   // }
 
+
   render() {
+    
     let itemsList = null;
     if (this.props.items) {
       itemsList = this.props.items.map(item => {
-
+        
         return (
 
           <tr key={item._id}>
             <td>{item.product_name}</td>
+            
             <td>{item.product_type}</td>
             <td>{item.product_description}</td>
             <td>{item.purchase_date}</td>
@@ -132,9 +179,9 @@ class Products extends React.Component {
                 <span id="edit" className="btn btn-light" onClick={() => { this.doneEdit(item._id) }}> Edit </span>
               </Link>
 
-              <Link to='/deleteproduct'>
-                <button id="delete" className="btn btn-danger" onClick={()=>{this.productDeleted(item._id)}}> Delete </button>
-              </Link>
+            
+                <button id="delete" className="btn btn-danger" onClick={()=>{this.onDeleteClick(item._id)}}> Delete </button>
+            
             </td>
           </tr >
         );
@@ -181,7 +228,9 @@ class Products extends React.Component {
   }
 }
 Products.propTypes = {
-  items: React.PropTypes.array.isRequired
+  items: React.PropTypes.array.isRequired,
+  item: PropTypes.object.isRequired,
+  
 }
 
 function mapStateToProps(state) {

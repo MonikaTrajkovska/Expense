@@ -5,9 +5,33 @@ const Item=require('../models/Items.js')
 
 
 const getAll=(req,res)=>{
-    Item.getAll()
-    .then(items=>{
-        res.status(200).send(items)
+     let q={}
+    
+     let sort={};
+
+      if(req.query.date_from != undefined){
+          if(q.purchase_date == undefined){
+              q.purchase_date={}
+          }
+          q.purchase_date.$gte = new Date(Number(req.query.date_from))
+      }
+      if(req.query.date_to != undefined){
+         if(q.purchase_date == undefined){
+              q.purchase_date={}
+          }
+          q.purchase_date.$lte = new Date (Number(req.query.date_to))
+      }
+      if(req.query.sort != undefined){
+         let sortable=['purchase_date','product_price']
+         let sq=req.query.sort.split(':')
+         if(sortable.indexOf(sq[0]) > -1){
+              sort[sq[0]] = sq[1] == 'desc' ? -1 :1
+          }
+      }
+    
+    Item.getAll(q,sort)
+    .then(data=>{
+        res.status(200).send(data)
     })
     .catch(err=>{
         res.status(500).send(err)
@@ -15,25 +39,25 @@ const getAll=(req,res)=>{
 }
 const getOne = (req, res) => {
     Item.getOne(req.params.id, req.user.id)
-    .then(items=> {
-        res.status(200).send(items);
+    .then(data=> {
+        res.status(200).send(data);
     })
     .catch(err => {
         res.status(500).send(err);
     });
 }
 const save = (req, res) => {
-    var items = req.body;
+    var data = req.body;
     let er = 0;
-    if (items.product_name == undefined || items.product_name.length == 0) { er++; }
-    if (items.product_type == undefined || items.product_type.length == 0) { er++; }
-    if (items.product_description == undefined || items.product_description.length == 0) { er++; }
-    if (items.purchase_date == undefined || items.purchase_date.length == 0) { er++; }
-    if (items.product_price== undefined || items.product_price.length == 0) { er++; }
+    if (data.product_name == undefined || data.product_name.length == 0) { er++; }
+    if (data.product_type == undefined || data.product_type.length == 0) { er++; }
+    if (data.product_description == undefined || data.product_description.length == 0) { er++; }
+    if (data.purchase_date == undefined || data.purchase_date.length == 0) { er++; }
+    if (data.product_price== undefined || data.product_price.length == 0) { er++; }
    
 
     if (er == 0) {
-        Item.save({...items,user_id:req.user_id})
+        Item.save({...data,user_id:req.user_id})
             .then(() => {
                 res.status(201).send('Created');
             })
@@ -45,17 +69,17 @@ const save = (req, res) => {
     }
 }
 const replace = (req, res) => {
-    var items = req.body;
+    var data = req.body;
     let er = 0;
-    if (items.product_name == undefined || items.product_name.length == 0) { er++; }
-    if (items.product_type == undefined || items.product_type.length == 0) { er++; }
-    if (items.product_description == undefined || items.product_description.length == 0) { er++; }
-    if (items.purchase_date == undefined || items.purchase_date.length == 0) { er++; }
-    if (items.product_price== undefined || items.product_price.length == 0) { er++; }
+    if (data.product_name == undefined || data.product_name.length == 0) { er++; }
+    if (data.product_type == undefined || data.product_type.length == 0) { er++; }
+    if (data.product_description == undefined || data.product_description.length == 0) { er++; }
+    if (data.purchase_date == undefined || data.purchase_date.length == 0) { er++; }
+    if (data.product_price== undefined || data.product_price.length == 0) { er++; }
    
 
     if (er == 0) {
-        Item.replace(req.params.id, items)
+        Item.replace(req.params.id, data)
             .then(() => {
                 res.status(204).send();
             })
@@ -68,8 +92,8 @@ const replace = (req, res) => {
 }
 
 const update = (req, res) => {
-    var items = req.body;
-    Item.replace(req.params.id, items) //koe id ke bide vo url toa se brise so ova req.params.id
+    var data = req.body;
+    Item.replace(req.params.id, data) //koe id ke bide vo url toa se brise so ova req.params.id
         .then(() => {
             res.status(204).send();
         })

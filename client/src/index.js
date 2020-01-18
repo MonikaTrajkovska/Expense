@@ -9,6 +9,7 @@ import Expenses from './components/Expenses'
 import Products from './components/Products'
 import DeleteProduct from './components/DeleteProduct'
 import UpdateProduct from './components/UpdateProduct'
+import Table from './components/Table'
 
 import store from './redux/store'
 // import AppNavBar from './components/AppNavBar'
@@ -57,12 +58,13 @@ const Routes = () => {
                         <NewProduct />
                     </>
                 } />
-                <Route exact path="/expenses" render={() =>
+                {/* <Route exact path="/expenses" render={() =>
                     <>
                         <Header />
                         <Expenses />
                     </>
-                } />
+                } /> */}
+                 <Route exact path="/expenses" render={() => <Expenses header={Header} products={Table}/>} />
                 <Route exact path="/products" render={() =>
                     <>
                         <Header />

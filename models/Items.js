@@ -1,61 +1,46 @@
 const mongoose=require('mongoose')
 
 const Item=mongoose.model(
-    'item',
+    'items',
     new mongoose.Schema(
         {
-            product_name:{
-                type:String,
-                require:true},
-            product_type:{
-                type:String,
-                require:true},
-            product_description:{
-                type:String,
-                require:true},
-            purchase_date:{
-                type:Date,
-                default:Date.now
-            },
-            product_price:{
-                type:String,
-                require:true},
-                // user_id:{
-                //     type:String,
-                //      require:true  
-                // },  
-        },
-        
-        
-        {
-            collection: 'items'
+            product_name:String,
+            product_type:String,
+            product_description:String,
+            purchase_date:Date,
+            product_price:Number,
+            user_id:String,
+            _created:Date,
+            _modified:Date
+              
+ 
         })
 );
 
-const getAll = ()=>{
+const getAll = (q,sort)=>{
     return new Promise((success,fail)=>{
-        Item.find({},(err,items)=>{
+        Item.find(q,{},{sort:sort},(err,data)=>{
             if(err){
                 return fail(err)
             }
-            return success(items)
+            return success(data)
         })
     })
 }
 const getOne = (id, userID) => {
     return new Promise((success, fail) => {
-        Item.find({ _id: id, user_id: userID }, (err, items) => {
+        Item.find({ _id: id, user_id: userID }, (err, data) => {
             if (err) {
                 return fail(err);
             }
-            return success(items);
+            return success(data);
         });
     });
 };
-const save=(items)=>{
+const save=(data)=>{
     return new Promise((success,fail)=>{
-        var i=new Item(items)
-        i.save(items,err=>{
+        var i=new Item(data)
+        i.save(data,err=>{
             if(err){
                 return fail(err)
             }
@@ -63,9 +48,9 @@ const save=(items)=>{
         })
     })
 }
-const replace = (id, items) => {
+const replace = (id, data) => {
     return new Promise((success, fail) => {
-        Item.findByIdAndUpdate(id , items, err => {
+        Item.findByIdAndUpdate({_id:id} , data, err => {
             if (err) {
                 return fail(err);
             }
@@ -73,9 +58,9 @@ const replace = (id, items) => {
         });
     });
 }
-const update = (id, items) => {
+const update = (id, data) => {
     return new Promise((success, fail) => {
-        Product.findByIdAndUpdate(id, {$set: {items}}, err => {
+        Product.findByIdAndUpdate(id, {$set: {data}}, err => {
             if(err){
                 return fail(err);
             }

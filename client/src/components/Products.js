@@ -5,7 +5,9 @@ import axios from "axios";
 import {
   getItems,
   editOneItem,
-deleteItem
+deleteItem,
+Update,
+getTotalPrice
 
 } from "../redux/actions/itemsActions";
 import { connect } from "react-redux";
@@ -22,21 +24,72 @@ class Products extends React.Component {
     this.state = {
       showModal: null,
       item:[],
-      alertShow:false
-
+      alertShow:false,
+      filterOption: null,
+      Update:false,
+      sort: null
     };
   }
+//ova treba
+  // componentDidMount() {
+  //   axios.get("http://localhost:8084/api/v1/items",
+  //     { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
+  //     .then(res => {
+  //       store.dispatch(getItems(res.data));
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  //   }
 
-  componentDidMount() {
-    axios.get("http://localhost:8084/api/v1/items",
-      { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
-      .then(res => {
-        store.dispatch(getItems(res.data));
-      })
-      .catch(err => {
-        console.log(err);
-      })
+  componentDidMount(){
+    axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc", 
+    { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
+    .then(res=>{
+        store.dispatch(getItems(res.data))
+        this.setState({Update: this.props.Update})
+        console.log('didMount')
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
+// ***Trigira posle brishenje na proizvod i posle edit / create new***
+componentDidUpdate() {
+    if(this.state.Update === true) {
+        if(this.state.sort === null) {
+            axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
+            { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
+            .then(res=>{
+                store.dispatch(getItems(res.data))
+                store.dispatch(Update(false))
+                console.log('Update')
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+            this.setState({Update: false})
+        } else if(this.state.sort != null) {
+            axios.get(`http://localhost:8084/api/v1/items?sort=${this.state.sort}`,
+            { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
+            .then(res=>{
+                store.dispatch(getItems(res.data))
+                store.dispatch(Update(false))
+                console.log('Update')
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+            this.setState({
+                Update: false,
+                sort: null
+            })
+        } else {
+            console.log('Error kaj Products - compDidUpdate!')
+        }
     }
+}
 
 
 // componentDidMount(){
@@ -104,7 +157,7 @@ class Products extends React.Component {
                })
                .catch(err => {
                    console.log(err)
-               
+               })
                
                return (
                     <React.Fragment>
@@ -121,7 +174,7 @@ class Products extends React.Component {
                      </React.Fragment>
                     )
                }     
-               )}               
+                                  
   doneEdit = (_id) => {
     // alert('TEST');
     // console.log(this.props);
@@ -171,7 +224,7 @@ class Products extends React.Component {
             
             <td>{item.product_type}</td>
             <td>{item.product_description}</td>
-            <td>{item.purchase_date}</td>
+            <td>{item.purchase_date.toString().slice(0, 10)}</td>
             <td>{item.product_price}</td>
             <td>
 

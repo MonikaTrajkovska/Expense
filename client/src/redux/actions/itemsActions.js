@@ -1,8 +1,8 @@
 
-export function getItems(items) {
+export function getItems(data) {
     return {
         type: 'GET_ITEMS',
-        payload: items
+        payload: data
     }
 }
 // export function removeItemsToStore(items) {
@@ -17,7 +17,12 @@ export function getItems(items) {
          payload: _id
      }
 }
-
+export const getTotalPrice = (price) => {
+    return {
+        type: "GET_TOTAL_PRICE",
+        payload: price
+    }
+}
 export function Update(item) {
     return {
         type: 'UPDATE',

@@ -3,6 +3,7 @@ const initialUserState = {
     newProduct: false,
     Update: false,
     editItems: {},
+    
 }
 
 export function itemsReducer(state = initialUserState, action) {
@@ -61,6 +62,9 @@ export function itemsReducer(state = initialUserState, action) {
                     purchase_date: action.payload.purchase_date,
                     product_price: action.payload.product_price
                 }
+            }
+            case "GET_TOTAL_PRICE": {
+                return { ...state, totalPrice: action.payload }
             }
         case 'UPDATE':
             return {

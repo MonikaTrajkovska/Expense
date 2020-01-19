@@ -41,6 +41,12 @@ class Products extends React.Component {
   //       console.log(err);
   //     })
   //   }
+  filterProduct = (event) => {
+    this.setState({
+         Update: true,
+        sort: event.target.value
+    })
+  }
 
   componentDidMount(){
     axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc", 
@@ -55,7 +61,6 @@ class Products extends React.Component {
     })
 }
 
-// ***Trigira posle brishenje na proizvod i posle edit / create new***
 componentDidUpdate() {
     if(this.state.Update === true) {
         if(this.state.sort === null) {
@@ -86,7 +91,7 @@ componentDidUpdate() {
                 sort: null
             })
         } else {
-            console.log('Error kaj Products - compDidUpdate!')
+            console.log('Error ')
         }
     }
 }
@@ -246,12 +251,12 @@ componentDidUpdate() {
 
           <h3>Products</h3>
           <label>Filter by:
-<select id="filter5">
-              <option>Year</option>
-              <option>Highest Price</option>
-              <option>Lowest Price</option>
-              <option>Latest Purchases</option>
-            </select>
+          <select name="purchase-filter" className="select-box" onChange={this.filterProduct}>
+                                <option value="purchase_date:desc">Latest Purchase</option>
+                                <option value="product_price:desc">Highest Price</option>
+                                <option value="product_price:asc">Lowest Price</option>
+                                <option value="purchase_date:asc">First Purchase</option>
+                            </select>
           </label>
         </div>
 

@@ -5,12 +5,7 @@ export function getItems(data) {
         payload: data
     }
 }
-// export function removeItemsToStore(items) {
-//     return {
-//       type: "DELETE_ITEM",
-//       payload: items
-//     };
-//   }
+
  export const deleteItem = (_id) => {
      return {
         type: "DELETE_ITEM",

@@ -1,10 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
-
-// import store from '../redux/store'
 import { Update, newItem, editOneItem } from '../redux/actions/itemsActions'
-
 import './New product.css'
 
 class UpdateProduct extends React.Component {
@@ -48,16 +45,6 @@ class UpdateProduct extends React.Component {
             .catch(err => {
                 console.log(err);
             });
-
-        // store.dispatch(Update(true))
-        // store.dispatch(newItem(false))
-        // store.dispatch(editOneItem(
-        //     this.props._id,
-        //     this.props.product_name,
-        //     this.props.product_type,
-        //     this.props.product_description,
-        //     this.props.purchase_date,
-        //     this.prop.product_price))
     }
 
 
@@ -66,9 +53,7 @@ class UpdateProduct extends React.Component {
         return (
             <React.Fragment>
                 <h3>Edit this product </h3>
-
-
-                <div id="login2">
+                      <div id="login2">
                     <div className="box-container2">
                         <form >
                             <p className="input-container2">

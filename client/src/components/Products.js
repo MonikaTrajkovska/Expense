@@ -16,7 +16,7 @@ import store from '../redux/store'
 import './Products.css'
 import PropTypes from 'prop-types';
 
-// import { render } from "react-dom";
+
 
 class Products extends React.Component {
   constructor(props) {
@@ -30,17 +30,7 @@ class Products extends React.Component {
       sort: null
     };
   }
-//ova treba
-  // componentDidMount() {
-  //   axios.get("http://localhost:8084/api/v1/items",
-  //     { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
-  //     .then(res => {
-  //       store.dispatch(getItems(res.data));
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  //   }
+
   filterProduct = (event) => {
     this.setState({
          Update: true,
@@ -97,58 +87,7 @@ componentDidUpdate() {
 }
 
 
-// componentDidMount(){
-    
-//        axios.delete(`http://localhost:8084/api/v1/items/${id}`,
-//       { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
-//       .then(res=>{
-//           store.dispatch(deleteItem(_id))
-//            // console.log(res.data)
 
-//       })
-//        .catch(err=>{
-//           console.log(err)
-
-//       })
-//     }
-//   return (
-//     <React.Fragment>
-      
-//               <div className="modal6">
-        
-//           <h3>Delete Product</h3>
-//          <p>You are about to delete this product.Are you sure you wish to continue?</p>
-//            <div className="alert-btn6">
-//               <button className="cancel-btn6">Cancel</button>
-//             <button className="delete-btn6">Delete</button>
-//         </div>
-//       </div>       >
-//     </React.Fragment>
-//     )
-//          })
-//        }
-
-// productDeleted = (_id) => {  
-//   var item = this.props.items.filter((v, i) => {
-//   if (v._id === _id) {
-//     return v;
-//   }
-//   return
-// })
-
-// this.props.editOneItem(item[0]._id)
-// }
-
-// delete=(_id)=>{
-//   var item=this.props.filter((v,i)=>{
-//     if(v._id===_id){
-//       return v
-//     }
-//     return
-//   })
-  
-//   this.props.deleteItem(item._id)
-// }
  onDeleteClick = _id => {
      axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
                {

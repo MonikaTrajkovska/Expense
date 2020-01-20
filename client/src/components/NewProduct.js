@@ -76,35 +76,35 @@ class NewProduct extends React.Component {
                                 <input type="text" className="text-field2"
                                     id='product_name'
                                     onChange={this.save}
-                                    defaultValue={this.state.product_name} />
+                                    defaultValue={this.props.product_name} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Product Type</label> <br />
                                 <input type="text" className="text-field2"
                                     id='product_type'
                                     onChange={this.save}
-                                    defaultValue={this.state.newProduct} />
+                                    defaultValue={this.props.product_type} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Product Description</label> <br />
                                 <input type="text" className="text-field2"
                                     id='product_description'
                                     onChange={this.save}
-                                    defaultValue={this.state.newProduct} />
+                                    defaultValue={this.props.product_description} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Purchase Date</label> <br />
                                 <input type="date" className="text-field2"
                                     id='purchase_date'
                                     onChange={this.save}
-                                    defaultValue={this.state.newProduct} />
+                                    defaultValue={this.props.purchase_date} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Product Price</label> <br />
                                 <input type="text" className="text-field2"
                                     id='product_price'
                                     onChange={this.save}
-                                    defaultValue={this.state.newProduct} />
+                                    defaultValue={this.props.product_price} />
                             </p>
 
                             {!this.state.newProduct}

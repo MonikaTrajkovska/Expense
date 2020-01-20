@@ -10,8 +10,8 @@ class UpdateProduct extends React.Component {
         console.log(this.props);
 
         this.state = {
-            editItems:this.props.editItems,
-             _id: this.props._id,
+            editItems: this.props.editItems,
+            _id: this.props._id,
             product_name: this.props.product_name,
             product_type: this.props.product_type,
             product_description: this.props.product_description,
@@ -53,7 +53,7 @@ class UpdateProduct extends React.Component {
         return (
             <React.Fragment>
                 <h3>Edit this product </h3>
-                      <div id="login2">
+                <div id="login2">
                     <div className="box-container2">
                         <form >
                             <p className="input-container2">
@@ -61,35 +61,35 @@ class UpdateProduct extends React.Component {
                                 <input type="text" className="text-field2"
                                     id='product_name'
                                     onChange={this.save}
-                                    defaultValue={this.props.editItems} />
+                                    defaultValue={this.state.editItems} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Product Type</label> <br />
                                 <input type="text" className="text-field2"
                                     id='product_type'
                                     onChange={this.save}
-                                    defaultValue={this.props.editItems} />
+                                    defaultValue={this.state.editItems} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Product Description</label> <br />
                                 <input type="text" className="text-field2"
                                     id='product_description'
                                     onChange={this.save}
-                                    defaultValue={this.props.editItems} />
+                                    defaultValue={this.state.editItems} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Purchase Date</label> <br />
                                 <input type="date" className="text-field2"
                                     id='purchase_date'
                                     onChange={this.save}
-                                    defaultValue={this.props.editItems} />
+                                    defaultValue={this.state.editItems} />
                             </p>
                             <p className="input-container2">
                                 <label className="text-field-input2">Product Price</label> <br />
                                 <input type="text" className="text-field2"
                                     id='product_price'
                                     onChange={this.save}
-                                    defaultValue={this.props.editItems} />
+                                    defaultValue={this.state.editItems} />
                             </p>
 
 

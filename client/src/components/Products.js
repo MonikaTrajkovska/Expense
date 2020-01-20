@@ -5,9 +5,9 @@ import axios from "axios";
 import {
   getItems,
   editOneItem,
-deleteItem,
-Update,
-getTotalPrice
+  deleteItem,
+  Update,
+  getTotalPrice
 
 } from "../redux/actions/itemsActions";
 import { connect } from "react-redux";
@@ -23,105 +23,107 @@ class Products extends React.Component {
     super(props);
     this.state = {
       showModal: null,
-      item:[],
-      alertShow:false,
+      item: [],
+      alertShow: false,
       filterOption: null,
-      Update:false,
+      Update: false,
       sort: null
     };
   }
 
   filterProduct = (event) => {
     this.setState({
-         Update: true,
-        sort: event.target.value
+      Update: true,
+      sort: event.target.value
     })
   }
 
-  componentDidMount(){
-    axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc", 
-    { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
-    .then(res=>{
+  componentDidMount() {
+    axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
+      { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
+      .then(res => {
         store.dispatch(getItems(res.data))
-        this.setState({Update: this.props.Update})
+        this.setState({ Update: this.props.Update })
         console.log('didMount')
-    })
-    .catch(err=>{
+      })
+      .catch(err => {
         console.log(err)
-    })
-}
+      })
+  }
 
-componentDidUpdate() {
-    if(this.state.Update === true) {
-        if(this.state.sort === null) {
-            axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
-            { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
-            .then(res=>{
-                store.dispatch(getItems(res.data))
-                store.dispatch(Update(false))
-                console.log('Update')
-            })
-            .catch(err=>{
-                console.log(err)
-            })
-            this.setState({Update: false})
-        } else if(this.state.sort != null) {
-            axios.get(`http://localhost:8084/api/v1/items?sort=${this.state.sort}`,
-            { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
-            .then(res=>{
-                store.dispatch(getItems(res.data))
-                store.dispatch(Update(false))
-                console.log('Update')
-            })
-            .catch(err=>{
-                console.log(err)
-            })
-            this.setState({
-                Update: false,
-                sort: null
-            })
-        } else {
-            console.log('Error ')
-        }
+  componentDidUpdate() {
+    if (this.state.Update === true) {
+      if (this.state.sort === null) {
+        axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
+          { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
+          .then(res => {
+            store.dispatch(getItems(res.data))
+            store.dispatch(Update(false))
+            console.log('Update')
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        this.setState({ Update: false })
+      } else if (this.state.sort != null) {
+        axios.get(`http://localhost:8084/api/v1/items?sort=${this.state.sort}`,
+          { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
+          .then(res => {
+            store.dispatch(getItems(res.data))
+            store.dispatch(Update(false))
+            console.log('Update')
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        this.setState({
+          Update: false,
+          sort: null
+        })
+      } else {
+        console.log('Error ')
+      }
     }
-}
+  }
 
 
 
- onDeleteClick = _id => {
-     axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
-               {
-                  headers: {
-                       'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-                   }
-               })
-               .then(res => {
-                  console.log(res)
-                   store.dispatch(deleteItem(_id))
-               })
-               .catch(err => {
-                   console.log(err)
-               })
-               
-               return (
-                this.setState({
-                  showModal:(
-                    <React.Fragment>
-                      
-                               <div className="modal6">
-                        
-                          <h3>Delete Product</h3>
-                         <p>You are about to delete this product.Are you sure you wish to continue?</p>
-                           <div className="alert-btn6">
-                             <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
-                             <button className="delete-btn6"  onClick={()=>{this.onDeleteClick(_id)}}>Delete</button>
-                       </div>
-                       </div>     
-                     </React.Fragment>
-              )
-            })
-               )}
-                                  
+  delete = _id => {
+    this.setState({
+      showModal: (
+        <React.Fragment>
+
+          <div className="modal6">
+
+            <h3>Delete Product</h3>
+            <p>You are about to delete this product.Are you sure you wish to continue?</p>
+            <div className="alert-btn6">
+              <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
+              <button className="delete-btn6" onClick={() => { this.onDeleteClick(_id) }}>Delete</button>
+            </div>
+          </div>
+        </React.Fragment>
+      )
+    })
+  }
+  onDeleteClick = _id => {
+    axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
+      })
+      .then(res => {
+        console.log(res)
+        store.dispatch(deleteItem(_id))
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+
+  }
+
   doneEdit = (_id) => {
     // alert('TEST');
     // console.log(this.props);
@@ -144,10 +146,10 @@ componentDidUpdate() {
     // console.log(item[0]);
 
     // store.dispatch(
-     
+
     this.props.editOneItem(item[0]._id, item[0].product_name, item[0].product_type, item[0].product_description, item[0].purchase_date, item[0].product_price);
     // store.dispatch(true)
-      }
+  }
   // edit(e){
   //   var id=e.target.getAttribute('data-key')
   //   store.dispatch({
@@ -159,16 +161,16 @@ componentDidUpdate() {
 
 
   render() {
-    
+
     let itemsList = null;
     if (this.props.items) {
       itemsList = this.props.items.map(item => {
-        
+
         return (
 
           <tr key={item._id}>
             <td>{item.product_name}</td>
-            
+
             <td>{item.product_type}</td>
             <td>{item.product_description}</td>
             <td>{item.purchase_date.toString().slice(0, 10)}</td>
@@ -179,9 +181,9 @@ componentDidUpdate() {
                 <span id="edit" className="btn btn-light" onClick={() => { this.doneEdit(item._id) }}> Edit </span>
               </Link>
 
-            
-                <button id="delete" className="btn btn-danger" onClick={()=>{this.onDeleteClick(item._id)}}> Delete </button>
-            
+
+              <button id="delete" className="btn btn-danger" onClick={() => this.delete(item._id)}> Delete </button>
+
             </td>
           </tr >
         );
@@ -194,11 +196,11 @@ componentDidUpdate() {
           <h3>Products</h3>
           <label>Filter by:
           <select name="purchase-filter" className="select-box" onChange={this.filterProduct}>
-                                <option value="purchase_date:desc">Latest Purchase</option>
-                                <option value="product_price:desc">Highest Price</option>
-                                <option value="product_price:asc">Lowest Price</option>
-                                <option value="purchase_date:asc">First Purchase</option>
-                            </select>
+              <option value="purchase_date:desc">Latest Purchase</option>
+              <option value="product_price:desc">Highest Price</option>
+              <option value="product_price:asc">Lowest Price</option>
+              <option value="purchase_date:asc">First Purchase</option>
+            </select>
           </label>
         </div>
 
@@ -230,7 +232,7 @@ componentDidUpdate() {
 Products.propTypes = {
   items: React.PropTypes.array.isRequired,
   item: PropTypes.object.isRequired,
-  
+
 }
 
 function mapStateToProps(state) {

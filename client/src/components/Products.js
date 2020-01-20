@@ -104,6 +104,8 @@ componentDidUpdate() {
                })
                
                return (
+                this.setState({
+                  showModal:(
                     <React.Fragment>
                       
                                <div className="modal6">
@@ -111,13 +113,14 @@ componentDidUpdate() {
                           <h3>Delete Product</h3>
                          <p>You are about to delete this product.Are you sure you wish to continue?</p>
                            <div className="alert-btn6">
-                             <button className="cancel-btn6">Cancel</button>
-                             <button className="delete-btn6">Delete</button>
+                             <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
+                             <button className="delete-btn6"  onClick={()=>{this.onDeleteClick(_id)}}>Delete</button>
                        </div>
                        </div>     
                      </React.Fragment>
-                    )
-               }     
+              )
+            })
+               )}
                                   
   doneEdit = (_id) => {
     // alert('TEST');

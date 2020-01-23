@@ -1,6 +1,6 @@
 
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './Login.css'
 import './Shared.css'
@@ -61,8 +61,10 @@ class Login extends React.Component {
        
 
           <div className="additional-info" >
-                        <p>Or if you don't have an account, 
-                            <button onClick={this.props.registerDone} >Register</button>
+                        <p className="additional-info1">Or if you don't have an account, 
+                            <Link to='/register'>
+                            <span >Register</span>
+                            </Link>
                         </p>
                     </div>
                 </div>

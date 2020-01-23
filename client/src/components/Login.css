@@ -13,10 +13,9 @@ html, body{
     width: 350px;
     background: #fff;
     border-color: #C6C6C6;
-    /* margin-left: 250px; */
-    /* margin-top: 100px; */
     border-radius: 10px;
-    padding: 0px;
+    padding: 0px 0px 0px 10px;
+    margin: 170px;
 }
    
 #login{
@@ -27,7 +26,7 @@ html, body{
     height: 100%;
     align-items: center;
     flex-wrap: wrap;
-    align-content: center;
+    /* align-content: center; */
     
 }
 .additional-info{
@@ -38,7 +37,11 @@ html, body{
     width: 100%;
     text-align: center;
 }
+.additional-info1{
+    display: flex,
+}
 .input-container{
     padding: 20px;
+    margin-left: 100px;
     
 }

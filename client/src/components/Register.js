@@ -1,9 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 import './Register.css'
-
-
- import axios from 'axios'
- 
  
  class Register extends React.Component {
      constructor () {
@@ -122,7 +120,9 @@ import './Register.css'
                           
                                   
      <div className="additional-info1"><p>Or if you don't have an account,
-      <button onClick={this.props.registerDone} className="register-login">Sign In</button>
+         <Link to='/'>
+      <span className="register-login">Sign In</span>
+      </Link>
                          </p>
                                                   
                                                  

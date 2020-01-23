@@ -13,8 +13,8 @@ body,html{
  
  
   h3{
-    margin-top: 40px;
-    margin-left:95px;
+    margin-top: 100px;
+    margin-left:170px;
   }
   
   .box-container2{
@@ -25,6 +25,8 @@ body,html{
     margin:auto;
     background-color: #fff;
     padding-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     height: 600px;
     width: 550px;
     border-radius: 5px;
@@ -91,6 +93,8 @@ body,html{
     font-family: 'Roboto', sans-serif;
     font-weight: 250;
     border-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 #new2 h3{
     margin-left: 200px;

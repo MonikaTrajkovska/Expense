@@ -1,11 +1,12 @@
 
 import React from 'react'
 import store from '../redux/store'
-import { Update } from '../redux/actions/itemsActions'
-import { connect } from 'react-redux'
-import './New product.css'
-
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { Update } from '../redux/actions/itemsActions'
+import './New product.css'
+import { Link } from 'react-router-dom'
+
 
 
 
@@ -33,7 +34,7 @@ class NewProduct extends React.Component {
             this.state.purchase_date === null ||
             this.state.product_price === null) {
             event.preventDefault()
-            alert('You missed some fileds')
+            alert('Please fill all the fields')
         } else if (this.state.product_name != null &&
             this.state.product_type != null &&
             this.state.product_description != null &&
@@ -62,13 +63,8 @@ class NewProduct extends React.Component {
     render() {
         return (
             <React.Fragment>
-
-
-
                 <h3>New Product</h3>
-
-
-                <div id="login2">
+                      <div id="login2">
                     <div className="box-container2">
                         <form action="">
                             <p className="input-container2">
@@ -106,16 +102,17 @@ class NewProduct extends React.Component {
                                     onChange={this.save}
                                     defaultValue={this.props.product_price} />
                             </p>
-
-                            {!this.state.newProduct}
+                            <Link to='/products'>
+                            {!this.state.newProduct} 
                             <button className="primary-button2"
                                 onClick={this.createProduct}>CREATE PRODUCT</button>
-
+                                </Link> 
 
                         </form>
                     </div>
                     <div className="new2">
-                        <p><i className="fas fa-plus-circle"></i></p>
+                        <Link to='/newproduct'>
+                        <p><i className="fas fa-plus-circle"></i></p></Link>
                         <p>You are creating new product</p>
                     </div>
                 </div>
@@ -129,8 +126,7 @@ class NewProduct extends React.Component {
 function mapStateToProps(state) {
     return {
         items: state.itemsReducer.items,
-
-        newProduct: state.itemsReducer.newProduct
+     newProduct: state.itemsReducer.newProduct
     }
 }
 

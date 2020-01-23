@@ -1,7 +1,7 @@
 import React from 'react'
-
-import './Header.css'
 import { Link } from 'react-router-dom'
+import './Header.css'
+
 const Header = () => {
     return (
         <React.Fragment>
@@ -11,7 +11,7 @@ const Header = () => {
             <div className="buttons3">
                 <Link to='/products'>
                 <button className="main-buttons3" id="products-btn3">Products</button></Link>
-                <Link to='/expneses'>
+                <Link to='/expenses'>
                 <button className="main-buttons3" id="expenses-btn3">Expenses</button>
                 </Link>
             </div>

@@ -1,21 +1,13 @@
 
-
 import React from "react";
-import axios from "axios";
-import {
-  getItems,
-  editOneItem,
-  deleteItem,
-  Update,
-  getTotalPrice
-
-} from "../redux/actions/itemsActions";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
-import store from '../redux/store'
-import './Products.css'
 import PropTypes from 'prop-types';
-
+import store from '../redux/store'
+import axios from "axios";
+import {getItems, editOneItem, deleteItem, Update,} from "../redux/actions/itemsActions";
+import './Products.css'
+// import './DeleteProduct.css'
 
 
 class Products extends React.Component {
@@ -24,7 +16,7 @@ class Products extends React.Component {
     this.state = {
       showModal: null,
       item: [],
-      alertShow: false,
+      // alertShow: false,
       filterOption: null,
       Update: false,
       sort: null
@@ -178,11 +170,13 @@ class Products extends React.Component {
             <td>
 
               <Link to={`/updateproduct/${item._id}`}>
-                <span id="edit" className="btn btn-light" onClick={() => { this.doneEdit(item._id) }}> Edit </span>
+                <span id="edit" className="far fa-edit" onClick={() => { this.doneEdit(item._id) }}></span>
+                
+                
               </Link>
+        
 
-
-              <button id="delete" className="btn btn-danger" onClick={() => this.delete(item._id)}> Delete </button>
+              <span id="delete" className="far fa-trash-alt" onClick={() => this.delete(item._id)}> </span>
 
             </td>
           </tr >

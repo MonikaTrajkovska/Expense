@@ -7,7 +7,7 @@ import store from '../redux/store'
 import axios from "axios";
 import {getItems, editOneItem, deleteItem, Update,} from "../redux/actions/itemsActions";
 import './Products.css'
-// import './DeleteProduct.css'
+ import './DeleteProduct.css'
 
 
 class Products extends React.Component {
@@ -16,27 +16,23 @@ class Products extends React.Component {
     this.state = {
       showModal: null,
       item: [],
-      // alertShow: false,
       filterOption: null,
       Update: false,
-      sort: null
+      align: null
     };
   }
 
-  filterProduct = (event) => {
-    this.setState({
-      Update: true,
-      sort: event.target.value
-    })
-  }
+  refilter = (event) => {
+    this.setState({ Update: true,align: event.target.value })}
+
 
   componentDidMount() {
-    axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
+    axios.get("http://localhost:8084/api/v1/items?align=purchase_date:desc",
       { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
       .then(res => {
         store.dispatch(getItems(res.data))
-        this.setState({ Update: this.props.Update })
-        console.log('didMount')
+        // this.setState({ Update: this.props.Update })
+       
       })
       .catch(err => {
         console.log(err)
@@ -44,42 +40,41 @@ class Products extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.Update === true) {
-      if (this.state.sort === null) {
-        axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
+   if ( this.state.Update && this.state.align === null) {
+        axios.get("http://localhost:8084/api/v1/items?align=purchase_date:desc",
           { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
           .then(res => {
             store.dispatch(getItems(res.data))
-            store.dispatch(Update(false))
-            console.log('Update')
+            //  store.dispatch(Update(false))
+            // console.log('Update')
           })
           .catch(err => {
             console.log(err)
           })
         this.setState({ Update: false })
-      } else if (this.state.sort != null) {
-        axios.get(`http://localhost:8084/api/v1/items?sort=${this.state.sort}`,
+      } else if (this.state.align != null) {
+        axios.get(`http://localhost:8084/api/v1/items?sort=${this.state.align}`,
           { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
           .then(res => {
             store.dispatch(getItems(res.data))
-            store.dispatch(Update(false))
-            console.log('Update')
+            // store.dispatch(Update(false))
+            // console.log('Update')
           })
           .catch(err => {
             console.log(err)
           })
         this.setState({
           Update: false,
-          sort: null
+          align: null
         })
       } else {
         console.log('Error ')
       }
     }
-  }
+  
 
 
-
+//funkcii za delete alert 
   delete = _id => {
     this.setState({
       showModal: (
@@ -115,17 +110,18 @@ class Products extends React.Component {
 
 
   }
+//funkcii za edit product 
 
   doneEdit = (_id) => {
     // alert('TEST');
-    // console.log(this.props);
-    // console.log('***************************************');
+    //  console.log(this.props);
+    //  console.log('***************************************');
     // console.log(this.props._id,
-    //   this.props.product_name,
-    //   this.props.product_type,
+    //    this.props.product_name,
+    //    this.props.product_type,
     //   this.props.product_description,
     //   this.props.purchase_date,
-    //   this.props.product_price);
+    //    this.props.product_price);
     // console.log('***************************************');
 
     var item = this.props.items.filter((v, i) => {
@@ -137,11 +133,12 @@ class Products extends React.Component {
 
     // console.log(item[0]);
 
-    // store.dispatch(
+    //  store.dispatch(
 
     this.props.editOneItem(item[0]._id, item[0].product_name, item[0].product_type, item[0].product_description, item[0].purchase_date, item[0].product_price);
-    // store.dispatch(true)
-  }
+    //  store.dispatch(true)
+     
+     }
   // edit(e){
   //   var id=e.target.getAttribute('data-key')
   //   store.dispatch({
@@ -160,9 +157,8 @@ class Products extends React.Component {
 
         return (
 
-          <tr key={item._id}>
+             <tr key={item._id}>
             <td>{item.product_name}</td>
-
             <td>{item.product_type}</td>
             <td>{item.product_description}</td>
             <td>{item.purchase_date.toString().slice(0, 10)}</td>
@@ -174,11 +170,8 @@ class Products extends React.Component {
                 
                 
               </Link>
-        
-
               <span id="delete" className="far fa-trash-alt" onClick={() => this.delete(item._id)}> </span>
-
-            </td>
+           </td>
           </tr >
         );
       });
@@ -189,7 +182,7 @@ class Products extends React.Component {
 
           <h3>Products</h3>
           <label>Filter by:
-          <select name="purchase-filter" className="select-box" onChange={this.filterProduct}>
+          <select name="purchase-filter" id="filter5" onChange={this.refilter}>
               <option value="purchase_date:desc">Latest Purchase</option>
               <option value="product_price:desc">Highest Price</option>
               <option value="product_price:asc">Lowest Price</option>
@@ -202,7 +195,6 @@ class Products extends React.Component {
           {this.state.showModal}
           <thead>
             <tr>
-
               <th>Product name</th>
               <th>Product type</th>
               <th>Product description</th>
@@ -239,7 +231,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getItems: data => dispatch(getItems(data)),
     editOneItem: data => dispatch(editOneItem(data))
-    // deleteItem:id=>dispatch(deleteItem(id))
+   
   }
 }
 export default connect(

@@ -28,7 +28,9 @@ body {
    
 }
 
-
+.modal-backdrop.in {
+	opacity: 0.9;
+}
 
 h3,p {
     Font-size: 22px;

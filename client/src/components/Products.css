@@ -10,7 +10,7 @@ body,html{
   
   table {
     width: 90%;
-    margin-left: 40px;
+    margin-left: 80px;
     text-align: center;
     border-collapse: collapse;
     border-radius: 1em;
@@ -47,7 +47,7 @@ body,html{
   #filter5{
       height: 30px;
       margin-top: 40px;
-      margin-right:100px;
+      margin-right: 155px;
       margin-bottom: 10px;
       color: #8d8d8d;
   }
@@ -82,7 +82,7 @@ body,html{
   border-radius: 5px;
   position: fixed;
   bottom: 43px;
-  right: 115px; 
+  right: 145px; 
   
   }
   .fixed-button5:hover{

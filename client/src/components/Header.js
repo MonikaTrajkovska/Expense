@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './Header.css'
+import Profile from './assets/images/profile.png.png'
 
 const Header = () => {
     return (
@@ -15,9 +16,12 @@ const Header = () => {
                 <button className="main-buttons3" id="expenses-btn3">Expenses</button>
                 </Link>
             </div>
+            <div className="picture3">
+            <img src={Profile} alt="Profile"  id='profile3'/>
+            </div>
             {/* <div className="picture3">              
-                    <p><img id="profile3" src="../../assets/images/profile.png.png" alt="profile"> Gal Gadot </img></p>
-            </div> */}
+                    <p><img id="profile3" src="../assets/images/profile.png.png" alt="profile"> Gal Gadot </img></p>
+            </div>  */}
         </nav>
         </header> 
 

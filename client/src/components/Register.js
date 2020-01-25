@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import './Register.css'
  
@@ -14,14 +15,19 @@ import './Register.css'
              telephone: null,
              country: null,
              password: null,
+             redirect:false
             
          }
      }
- 
+    
      saveValue = (event) => {
          this.setState({[event.target.id]: event.target.value})
      }
- 
+     sendToProducts = () => {
+        if (this.state.redirect) {
+            return <Redirect to="/products" />
+        }
+    }
   
  
      register = (event) => {
@@ -65,7 +71,7 @@ import './Register.css'
                      localStorage.setItem('jwt', res.data.jwt);
                      localStorage.setItem('name', this.state.first_name);
                      localStorage.setItem('lastName', this.state.last_name);
-                    
+                     this.setState({redirect: true});
                   
                  })
                  .catch(err=>{
@@ -81,7 +87,7 @@ import './Register.css'
      render () {
          return (
              <React.Fragment>
-                 
+                  {this.sendToProducts()}
                  <div className="login1">
                    <div className="box-container1">
                      <form>

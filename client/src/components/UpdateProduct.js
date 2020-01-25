@@ -93,7 +93,7 @@ class UpdateProduct extends React.Component {
                             </p>
 
 
-                            <button className="primary-button long" id="create-btn"
+                            <button className="primary-button2" 
                                 onClick={this.edit}>EDIT PRODUCT</button>
 
 

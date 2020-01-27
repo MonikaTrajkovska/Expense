@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import './Login.css'
-import './Shared.css'
+ import './Shared.css'
 
 
 class Login extends React.Component {

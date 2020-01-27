@@ -5,6 +5,8 @@ import {connect} from 'react-redux'
 
 import store from '../redux/store'
 import {sort, getItems} from '../redux/actions/itemsActions'
+import './Expenses.css'
+// import './Products.css'
 
 
 class Expenses extends React.Component {
@@ -13,7 +15,7 @@ class Expenses extends React.Component {
         this.state = {
             monthFilter: false,
             yearFilter: true,
-            toggle: true,
+            // toggle: true,
             refilter: null,
             Update: false
         }
@@ -23,7 +25,7 @@ class Expenses extends React.Component {
         this.setState({
             yearFilter: true,
             monthFilter: false,
-            toggle: true
+            // toggle: true
         })
     }
 
@@ -31,7 +33,7 @@ class Expenses extends React.Component {
         this.setState({
             yearFilter: false,
             monthFilter: true,
-            toggle: false
+            // toggle: false
         })
     }
 
@@ -56,7 +58,7 @@ class Expenses extends React.Component {
     componentDidUpdate(){
         if(this.state.Update){
             let date = this.state.refilter
-            if(date === 'total'){
+            if(date === 'all'){
                 axios.get(`http://localhost:8084/api/v1/items?sort=purchase_date:desc`,
                 { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}})
                 .then(res=>{
@@ -66,7 +68,7 @@ class Expenses extends React.Component {
                 .catch(err=>{
                     console.log(err)
                 })
-            } else if(date.length === 4){
+            } else if(date.length === 4  ){
                 let fromDate = new Date(`${date}-01-01 00:00:00.000`).getTime();
                 let toDate = new Date(`${date}-12-31 23:59:59.000`).getTime();
                 axios.get(`http://localhost:8084/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
@@ -78,7 +80,7 @@ class Expenses extends React.Component {
                 .catch(err=>{
                     console.log(err)
                 })
-            } else if (date.length === 7){
+            } else {  ///date.length ===7
                 let fromDate = new Date(`${date}-01 00:00:00.000`).getTime();
                 let toDate = new Date(`${date}-31 23:59:59.000`).getTime();
                 axios.get(`http://localhost:8084/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
@@ -91,7 +93,7 @@ class Expenses extends React.Component {
                     console.log(err)
                 })
             }
-            this.setState({Update: false})
+             this.setState({Update: false})
         }
     }
 
@@ -102,33 +104,36 @@ class Expenses extends React.Component {
             totalAmount += this.props.items[i].product_price
         }
         // Za options na selectbox od Year
-        let today = new Date();
-        let year = today.getFullYear();
-        let selectOptions= []
-        for (let i = 2000; i <= year; i++) {
-        selectOptions.push(<option key={i} value={i}>{i}</option>)
-        }
-        selectOptions.reverse();
+        //  let today = new Date();
+        //  let year = today.getFullYear();
+        // let selectOptions= []
+        // for (let i = 2000; i <= year; i++) {
+
+        // selectOptions.push(<option key={i} value={i}>{i}</option>)
+        //  }
+        //  selectOptions.reverse();
+       
+        // let selectOptions=['2000', '2001, '2002', '2003', '2004', '2005', '2006', '2007',
+        //  '2008', '2009', '2010', '2001']
+        // let today= new Date()
+        // let selectOptions=today.getFullYear()
+     
 
         return (
             <React.Fragment>
-             
-                <div id="expenses">
-                    <div id="expenses-header-one">
-                        <h1>Expenses</h1>
-                    </div>
+                 <h3>Expenses</h3>
+                <div className="expense4">
+                   
 
                     <div id="expenses-header-two">
-                        <button className={this.state.toggle? "tab-btn active-tab-btn " : "tab-btn"} 
-                            onClick={this.yearFilter}>YEARLY
-                        </button>
-                        <button className={!this.state.toggle? "tab-btn active-tab-btn " : "tab-btn"} 
-                            onClick={this.monthFilter}>MONTHLY
-                        </button>
-
+                        <button className= "yearly-btn4" onClick={this.yearFilter}>Yearly</button>
+                    {/* {this.state.toggle ? "yearly-btn4" : "yearly-btn4"}  */}
+                        <button className="monthly-btn4" onClick={this.monthFilter}>MONTHLY</button>
+                        {/* {!this.state.toggle ? "monthly-btn4" : "monthly-btn4"} */}
                         {this.state.monthFilter ? 
                             <p id="select-box-container">
-                                <label htmlFor="expenses-filter">Choose Month </label>
+                                <label htmlFor="filter4">Choose Month </label>
+                               
                                 <input type='month' className="select-box" id="expenses-month-box" onChange={this.Allrefilter}></input>
                             </p>
                         : null}
@@ -138,8 +143,11 @@ class Expenses extends React.Component {
                                 <label htmlFor="expenses-filter">Choose Year </label>
                                 <select name="expenses-filter" className="select-box" id="expenses-select-box" onChange={this.Allrefilter}>
                                     <option>----</option>
-                                    <option value={'total'}>Total</option>
-                                    {selectOptions}
+                                    <option value={'all'}>Total</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
                                 </select>
                             </p>
                         : null}
@@ -147,7 +155,7 @@ class Expenses extends React.Component {
                     </div>
                     <Table />
                 </div>
-                <div id="total-spent">
+                <div className="total-spent4">
                     <p>Total Spent: {totalAmount} den.</p>
                 </div>
             </React.Fragment>

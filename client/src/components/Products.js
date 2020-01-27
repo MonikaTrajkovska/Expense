@@ -7,7 +7,7 @@ import store from '../redux/store'
 import axios from "axios";
 import {getItems, editOneItem, deleteItem, Update,} from "../redux/actions/itemsActions";
 import './Products.css'
- import './DeleteProduct.css'
+//  import './DeleteProduct.css'
 
 
 class Products extends React.Component {
@@ -41,7 +41,7 @@ class Products extends React.Component {
 
   componentDidUpdate() {
    if ( this.state.Update && this.state.align === null) {
-        axios.get("http://localhost:8084/api/v1/items?align=purchase_date:desc",
+        axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
           { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
           .then(res => {
             store.dispatch(getItems(res.data))
@@ -57,7 +57,7 @@ class Products extends React.Component {
           { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
           .then(res => {
             store.dispatch(getItems(res.data))
-            // store.dispatch(Update(false))
+            //  store.dispatch(Update(false))
             // console.log('Update')
           })
           .catch(err => {
@@ -139,14 +139,14 @@ class Products extends React.Component {
     //  store.dispatch(true)
      
      }
-  // edit(e){
-  //   var id=e.target.getAttribute('data-key')
-  //   store.dispatch({
-  //     type:"UPDATE_ITEM",
-  //     id:id
-  //   })
-  //   // this.props.history.push('/edit/'+id)
-  // }
+//    edit(e){
+//      var id=e.target.getAttribute('data-key')
+//     store.dispatch({
+//       type:"UPDATE_ITEM",
+//       id:id
+//      })
+//     this.props.history.push('/edit/'+id)
+//  }
 
 
   render() {

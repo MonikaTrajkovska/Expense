@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-
+import './Products.css'
 
 
 class Table extends React.Component {
@@ -32,7 +32,8 @@ class Table extends React.Component {
     
         return(
             <React.Fragment>
-                <div className="table-container">
+                
+                <div className="table table-dark">
         <table>
           <thead>
             <tr>

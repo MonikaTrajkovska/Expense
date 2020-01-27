@@ -1,9 +1,10 @@
 
+
 .text-field-input{
     font-size: 15px;
     color:  #8D8D8D ;
-    /* margin-left: 50px; */
-    padding: 30px;
+    /* margin-left: 50px;
+    padding:50px; */
     margin-bottom: 8.5px;
 }
 .text-field{
@@ -14,7 +15,7 @@
     padding-left: 50px;
     padding-right: 50px;
     margin-top:5px;
-    margin-left: 20px;
+    /* margin-left: 100px; */
     margin-right: 100px;
     border-radius: 5px;
     padding-top: 10px;
@@ -31,9 +32,9 @@
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.17);
     padding-left: 100px;
     padding-right: 120px;
-    
-    margin-left: 40px;
-    /* margin-right: 100px;
+    margin: 20px 0px 50px 20px;
+    /* margin-left: 120px;
+    margin-right: 100px;
     margin-top: 10px;
     margin-bottom: 50px;
     margin-top: 20px; */

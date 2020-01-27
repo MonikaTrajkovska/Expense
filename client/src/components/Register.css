@@ -14,7 +14,7 @@ html, body{
     border-radius: 10px;
     padding: 40px;
     width: 330px;
-    margin-top: 50px;
+    margin-top: 60px;
 }
 .box-container1 form {
     width: 100%;
@@ -27,7 +27,6 @@ html, body{
     align-items: center;
     flex-wrap: wrap;
     align-content: center;
-    margin-left: -55px;
 }
 .input-container1 {
     margin: 0px 0px 20px 0px;
@@ -78,5 +77,4 @@ html, body{
     color: #8D8D8D;
     width: 100%;
     text-align: center;
-} 
-
+}

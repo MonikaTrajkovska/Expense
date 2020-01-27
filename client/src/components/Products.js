@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import store from '../redux/store'
 import axios from "axios";
-import {getItems, editOneItem, deleteItem, Update,} from "../redux/actions/itemsActions";
+import { getItems, editOneItem, deleteItem, Update, } from "../redux/actions/itemsActions";
 import './Products.css'
 //  import './DeleteProduct.css'
 
@@ -23,7 +23,8 @@ class Products extends React.Component {
   }
 
   refilter = (event) => {
-    this.setState({ Update: true,align: event.target.value })}
+    this.setState({ Update: true, align: event.target.value })
+  }
 
 
   componentDidMount() {
@@ -32,7 +33,7 @@ class Products extends React.Component {
       .then(res => {
         store.dispatch(getItems(res.data))
         // this.setState({ Update: this.props.Update })
-       
+
       })
       .catch(err => {
         console.log(err)
@@ -40,41 +41,41 @@ class Products extends React.Component {
   }
 
   componentDidUpdate() {
-   if ( this.state.Update && this.state.align === null) {
-        axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
-          { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
-          .then(res => {
-            store.dispatch(getItems(res.data))
-            //  store.dispatch(Update(false))
-            // console.log('Update')
-          })
-          .catch(err => {
-            console.log(err)
-          })
-        this.setState({ Update: false })
-      } else if (this.state.align != null) {
-        axios.get(`http://localhost:8084/api/v1/items?sort=${this.state.align}`,
-          { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
-          .then(res => {
-            store.dispatch(getItems(res.data))
-            //  store.dispatch(Update(false))
-            // console.log('Update')
-          })
-          .catch(err => {
-            console.log(err)
-          })
-        this.setState({
-          Update: false,
-          align: null
+    if (this.state.Update && this.state.align === null) {
+      axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
+        { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
+        .then(res => {
+          store.dispatch(getItems(res.data))
+          //  store.dispatch(Update(false))
+          // console.log('Update')
         })
-      } else {
-        console.log('Error ')
-      }
+        .catch(err => {
+          console.log(err)
+        })
+      this.setState({ Update: false })
+    } else if (this.state.align != null) {
+      axios.get(`http://localhost:8084/api/v1/items?sort=${this.state.align}`,
+        { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
+        .then(res => {
+          store.dispatch(getItems(res.data))
+          //  store.dispatch(Update(false))
+          // console.log('Update')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      this.setState({
+        Update: false,
+        align: null
+      })
+    } else {
+      console.log('Error ')
     }
-  
+  }
 
 
-//funkcii za delete alert 
+
+  //funkcii za delete alert 
   delete = _id => {
     this.setState({
       showModal: (
@@ -110,7 +111,7 @@ class Products extends React.Component {
 
 
   }
-//funkcii za edit product 
+  //funkcii za edit product 
 
   doneEdit = (_id) => {
     // alert('TEST');
@@ -131,22 +132,23 @@ class Products extends React.Component {
       return
     })
 
-    // console.log(item[0]);
+    console.log(item[0]);
 
     //  store.dispatch(
 
-    this.props.editOneItem(item[0]._id, item[0].product_name, item[0].product_type, item[0].product_description, item[0].purchase_date, item[0].product_price);
+    this.props.editOneItem(item[0]);
+
     //  store.dispatch(true)
-     
-     }
-//    edit(e){
-//      var id=e.target.getAttribute('data-key')
-//     store.dispatch({
-//       type:"UPDATE_ITEM",
-//       id:id
-//      })
-//     this.props.history.push('/edit/'+id)
-//  }
+
+  }
+  //    edit(e){
+  //      var id=e.target.getAttribute('data-key')
+  //     store.dispatch({
+  //       type:"UPDATE_ITEM",
+  //       id:id
+  //      })
+  //     this.props.history.push('/edit/'+id)
+  //  }
 
 
   render() {
@@ -157,7 +159,7 @@ class Products extends React.Component {
 
         return (
 
-             <tr key={item._id}>
+          <tr key={item._id}>
             <td>{item.product_name}</td>
             <td>{item.product_type}</td>
             <td>{item.product_description}</td>
@@ -167,11 +169,11 @@ class Products extends React.Component {
 
               <Link to={`/updateproduct/${item._id}`}>
                 <span id="edit" className="far fa-edit" onClick={() => { this.doneEdit(item._id) }}></span>
-                
-                
+
+
               </Link>
               <span id="delete" className="far fa-trash-alt" onClick={() => this.delete(item._id)}> </span>
-           </td>
+            </td>
           </tr >
         );
       });
@@ -231,7 +233,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getItems: data => dispatch(getItems(data)),
     editOneItem: data => dispatch(editOneItem(data))
-   
+
   }
 }
 export default connect(

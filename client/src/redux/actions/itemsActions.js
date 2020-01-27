@@ -6,11 +6,11 @@ export function getItems(data) {
     }
 }
 
- export const deleteItem = (_id) => {
-     return {
+export const deleteItem = (_id) => {
+    return {
         type: "DELETE_ITEM",
-         payload: _id
-     }
+        payload: _id
+    }
 }
 export const getTotalPrice = (price) => {
     return {
@@ -32,16 +32,11 @@ export function newItem(item) {
     }
 }
 
-export function editOneItem(_id, product_name, product_type, product_description, purchase_date, product_price) {
+export function editOneItem(item) {
     return {
         type: 'EDIT_ITEMS',
-        payload: {
-            _id,
-            product_name,
-            product_type,
-            product_description,
-            purchase_date,
-            product_price
-        }
+        payload:
+            item
+
     }
 }

@@ -23,16 +23,21 @@ const Routes = () => {
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/' component={Login} />
                 <Route exact path='/Register' component={Register} />
-                <Route exact path='/updateproduct/:id' component={UpdateProduct}/>
-                
-              
+                {/* <Route exact path='/updateproduct/:id' component={UpdateProduct}/> */}
+                <Route exact path="/updateproduct/:id" render={() =>
+                    <>
+                        <Header />
+                        <UpdateProduct />
+                    </>
+                } />
+
                 <Route exact path="/newproduct" render={() =>
                     <>
                         <Header />
                         <NewProduct />
                     </>
                 } />
-                <Route exact path="/expenses" render={() => <Expenses header={Header} products={Table}/>} />
+                <Route exact path="/expenses" render={() => <Expenses header={Header} products={Table} />} />
                 <Route exact path="/products" render={() =>
                     <>
                         <Header />

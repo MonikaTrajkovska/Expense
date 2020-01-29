@@ -3,11 +3,10 @@ import Table from './Table'
 import Header from './Header'
 import axios from 'axios'
 import { connect } from 'react-redux'
-
 import store from '../redux/store'
-import { sort, getItems } from '../redux/actions/itemsActions'
+import { getItems } from '../redux/actions/itemsActions'
 import './Expenses.css'
-// import './Products.css'
+
 
 
 class Expenses extends React.Component {
@@ -132,23 +131,29 @@ class Expenses extends React.Component {
                     <button className="monthly-btn4" onClick={this.monthFilter}>MONTHLY</button>
                     {/* {!this.state.toggle ? "monthly-btn4" : "monthly-btn4"} */}
                     {this.state.monthFilter ?
-                        <p id="select-box-container">
+                        <p id="box-container">
                             <label htmlFor="filter4">Choose Month </label>
 
-                            <input type='month' className="select-box" id="expenses-month-box" onChange={this.Allrefilter}></input>
+                            <input type='month' className="box" id="month-box" onChange={this.Allrefilter}></input>
                         </p>
                         : null}
 
                     {this.state.yearFilter ?
-                        <p id="select-box-container">
-                            <label htmlFor="expenses-filter">Choose Year </label>
-                            <select name="expenses-filter" className="select-box" id="expenses-select-box" onChange={this.Allrefilter}>
+                        <p id="box-container">
+                            <label htmlFor="filter4">Choose Year </label>
+                            <select  className="box" id="cost" onChange={this.Allrefilter}>
                                 <option>----</option>
                                 <option value={'all'}>Total</option>
                                 <option value="2020">2020</option>
                                 <option value="2019">2019</option>
                                 <option value="2018">2018</option>
                                 <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>
+                                <option value="2011">2011</option>
                             </select>
                         </p>
                         : null}
@@ -156,7 +161,7 @@ class Expenses extends React.Component {
                     <Table />
                 </div>
                 <div className="total-spent4">
-                    <p>Total Spent: {totalAmount} den.</p>
+                    <p>Total Spent: {totalAmount} denars .</p>
                 </div>
             </React.Fragment >
 

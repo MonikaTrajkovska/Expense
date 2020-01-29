@@ -90,10 +90,30 @@ body,html{
     align-items: center;
     width: 100%;
     
-    
-    
-   
-    
+  }
+  #box-container {
+    color: #575757;
+    margin-left: 25px;
+    display: initial;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#box-container label {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#month-box {
+    width: 170px;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+
+#cost {
+    width: 80px;
+    box-sizing: border-box;
+    padding-left: 5px;
 }
 .total-spent4{
     position: fixed;

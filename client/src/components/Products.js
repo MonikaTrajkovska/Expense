@@ -7,7 +7,7 @@ import store from '../redux/store'
 import axios from "axios";
 import { getItems, editOneItem, deleteItem, Update, } from "../redux/actions/itemsActions";
 import './Products.css'
-//  import './DeleteProduct.css'
+import './DeleteProduct.css'
 
 
 class Products extends React.Component {
@@ -74,22 +74,26 @@ class Products extends React.Component {
   }
 
 
-
   //funkcii za delete alert 
   delete = _id => {
     this.setState({
       showModal: (
         <React.Fragment>
 
-          <div className="modal6">
-
-            <h3>Delete Product</h3>
+          <div id="pop-up" className='delete'>
+        <div id="delete-container">
+            <div id="delete-text">
+                <h1>Delete Product</h1>
             <p>You are about to delete this product.Are you sure you wish to continue?</p>
-            <div className="alert-btn6">
-              <button className="cancel-btn6" onClick={() => this.setState({ showModal: null })} >Cancel</button>
-              <button className="delete-btn6" onClick={() => { this.onDeleteClick(_id) }}>Delete</button>
             </div>
-          </div>
+            <div id="delete-buttons">
+              <button className="delete-btn" id="cancel-btn" onClick={() => this.setState({ showModal: null })} >Cancel</button>
+              
+              <button className="delete-btn" id="delete-button"  onClick={() => { this.onDeleteClick(_id) }}>Delete</button>
+              
+              </div>
+        </div>
+    </div>
         </React.Fragment>
       )
     })

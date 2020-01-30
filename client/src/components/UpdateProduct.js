@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { Update, newItem, editOneItem } from '../redux/actions/itemsActions'
 import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { Update, newItem, editOneItem } from '../redux/actions/itemsActions'
 import { itemsReducer } from '../redux/reducers/itemsReducer'
 import './New product.css'
 
@@ -19,6 +20,7 @@ class UpdateProduct extends React.Component {
             product_description: this.props.item.product_description,
             purchase_date: this.props.item.purchase_date,
             product_price: this.props.item.product_price,
+            redirect:false
         }
     }
 
@@ -26,11 +28,11 @@ class UpdateProduct extends React.Component {
         this.setState({ [event.target.id]: event.target.value })
     }
 
-    // sendToProducts = () => {
-    //     if (this.state.redirect) {
-    //         return <Redirect to="/products" />
-    //     }
-    // }
+     sendToProducts = () => {
+        if (this.state.redirect) {
+         return <Redirect to="/products" />
+         }
+     }
     edit = (event) => {
         event.preventDefault()
         axios.put(
@@ -48,6 +50,7 @@ class UpdateProduct extends React.Component {
         )
             .then(res => {
                 console.log(res);
+                this.setState({redirect: true})
             })
             .catch(err => {
                 console.log(err);
@@ -60,7 +63,7 @@ class UpdateProduct extends React.Component {
         console.log(this.props.item)
         return (
             <React.Fragment>
-                {/* {this.sendToProducts()} */}
+                 {this.sendToProducts()}
 
                 <h3>Edit this product </h3>
                 <div id="login2">
@@ -102,7 +105,7 @@ class UpdateProduct extends React.Component {
                                     defaultValue={this.props.item.product_price} />
                             </p>
 
-
+                            
                             <button className="primary-button2"
                                 onClick={this.edit}>EDIT PRODUCT</button>
 

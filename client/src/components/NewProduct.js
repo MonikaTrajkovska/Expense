@@ -3,9 +3,10 @@ import React from 'react'
 import store from '../redux/store'
 import axios from 'axios'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Update } from '../redux/actions/itemsActions'
 import './New product.css'
-import { Link } from 'react-router-dom'
+
 
 
 

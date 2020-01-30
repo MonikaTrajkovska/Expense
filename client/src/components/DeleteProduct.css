@@ -1,85 +1,72 @@
-body {
-    /* general styles */
-    padding: 30px;
-    font-family: 'Open Sans', sans-serif;
-    Background: rgba(0, 0, 0, 0.59);
-    
-}
-
-.modal6 {
-    /* some styles to position the modal at the center of the page */
+#pop-up{
     position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 440px;
-    border-radius:10px;
-   
-    height: 225px;
-    margin-left: -150px;
-    margin-top: -100px;
-
-    text-align: center;
-    Background: #fff;
-    Padding: 40px;
-    /* needed styles for the overlay */
-    z-index: 10; /* keep on top of other elements on the page */
-    outline: rgba(0, 0, 0, 0.59);
-   
-   
-}
-
-.modal-backdrop.in {
-	opacity: 0.9;
-}
-
-h3,p {
-    Font-size: 22px;
-    Color: #575757;
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: flex-start;
-    text-align: left;
-    font-weight: 15px;
-    
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.59);
 }
-.alert-btn6{
+
+#delete-container {
+    width: 440px;
+    height: 225px;
+    background: #fff; 
+    padding: 30px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: -110px;
+}
+
+#delete-text {
+    color: #575757;
+}
+
+#delete-text h1 {
+    font-size: 20px; 
+    font-weight: bold; 
+    margin: 0;
+} 
+
+#delete-text p {
+    font-size: 18px;
+}
+
+#delete-buttons {
     display: flex;
     justify-content: flex-end;
-    
-   
-    
-}
-.cancel-btn6{
-Font-size: 15px;
-color: #576574;
-Background: Transparent;
-Border: 2px solid;
-Border-color: #576574;
-height: 45px;
- min-width: 30px;
-text-transform: uppercase;
- padding: 0px 25px;
-border-radius: 5px;
-font-weight: 700;
-margin-top: 50px;
-cursor: pointer;
-
+    margin-top: auto;
 }
 
-.delete-btn6{
- Font-size: 15px;
- color:white;
-Background: #576574;
-Box-shadow: 0px 0px 16px
-rgba(0, 0, 0, 0.17);
-height: 45px;
- min-width: 30px;
- text-transform: uppercase;
-padding: 0px 25px;
-  border-radius: 5px;
-  font-weight: 600;
-  margin-top: 50px;
-  margin-right: 20px;
-    cursor: pointer;
- 
-  
+.delete-btn {
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 5px;
+    outline: 0;
+    border:  0;
 }
+
+#cancel-btn {
+    color: #575757;
+    background: transparent;
+}
+
+#delete-button {
+    color: #fff;
+    background: #576574;
+    box-shadow: 0px 0px 16px  rgba(0, 0, 0, 0.17);   
+}
+
+.delete {
+    margin-top: -300px;
+}
+
+/* .log-out {
+    margin-top: -105px;
+} */

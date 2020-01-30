@@ -33,7 +33,7 @@ class Table extends React.Component {
         return(
             <React.Fragment>
                 
-                <div className="table table-dark">
+        <div className="table table-dark">
         <table>
           <thead>
             <tr>

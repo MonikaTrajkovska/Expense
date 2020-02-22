@@ -36,7 +36,7 @@ class UpdateProduct extends React.Component {
     edit = (event) => {
         event.preventDefault()
         axios.put(
-            `http://localhost:8084/api/v1/items/${this.props.item._id}`,
+            `https://mern-app-expensecalculator.herokuapp.com/api/v1/items/${this.props.item._id}`,
             {
                 product_name: this.state.product_name,
                 product_type: this.state.product_type,

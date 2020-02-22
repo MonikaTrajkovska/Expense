@@ -45,7 +45,7 @@ class Expenses extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
+        axios.get("https://mern-app-expensecalculator.herokuapp.com/api/v1/items?sort=purchase_date:desc",
             { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
             .then(res => {
                 store.dispatch(getItems(res.data))
@@ -59,7 +59,7 @@ class Expenses extends React.Component {
         if (this.state.Update) {
             let date = this.state.refilter
             if (date === 'all') {
-                axios.get(`http://localhost:8084/api/v1/items?sort=purchase_date:desc`,
+                axios.get(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items?sort=purchase_date:desc`,
                     { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
                     .then(res => {
                         store.dispatch(getItems(res.data))
@@ -71,7 +71,7 @@ class Expenses extends React.Component {
             } else if (date.length === 4) {
                 let fromDate = new Date(`${date}-01-01 00:00:00.000`).getTime();
                 let toDate = new Date(`${date}-12-31 23:59:59.000`).getTime();
-                axios.get(`http://localhost:8084/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
+                axios.get(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
                     { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
                     .then(res => {
                         store.dispatch(getItems(res.data))
@@ -83,7 +83,7 @@ class Expenses extends React.Component {
             } else {  ///date.length ===7
                 let fromDate = new Date(`${date}-01 00:00:00.000`).getTime();
                 let toDate = new Date(`${date}-31 23:59:59.000`).getTime();
-                axios.get(`http://localhost:8084/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
+                axios.get(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
                     { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
                     .then(res => {
                         store.dispatch(getItems(res.data))

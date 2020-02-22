@@ -23,7 +23,7 @@ const Routes = () => {
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/' component={Login} />
                 <Route exact path='/Register' component={Register} />
-                {/* <Route exact path='/updateproduct/:id' component={UpdateProduct}/> */}
+              
                 <Route exact path="/updateproduct/:id" render={() =>
                     <>
                         <Header />

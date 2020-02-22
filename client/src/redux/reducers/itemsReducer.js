@@ -15,38 +15,7 @@ export function itemsReducer(state = initialUserState, action) {
                 items: action.payload
             }
 
-        // case "DELETE_ITEM": {
-        //     const newItem = action.payload;
-        //     let newArray = [];
-        //     try {
-        //       newArray = state.items.slice();
-        //       for (let i = 0; i < newArray.length; i++) {
-        //         if (newArray[i].id === newItem.id) {
-        //           newArray.splice(i, 1);
-        //           break;
-        //         }
-        //       }
-
-        //       alert("User successfully deleted");
-        //       return {
-        //         ...state,
-        //         items: newArray
-        //       };
-        //     } catch (error) {
-        //       console.warn(error);
-        //       alert("Something went wrong ");
-        //       return {
-        //         ...state
-        //       };
-        //     }
-        //   }
-
-        //  case "DELETE_ITEM":{
-        //         let newItems = state.items.filter(item => {
-        //          return action.payload._id !== item._id
-        //      })
-        //      return { ...state, items: newItems }
-        // }
+     
         case 'DELETE_ITEM':
             return {
                 ...state,

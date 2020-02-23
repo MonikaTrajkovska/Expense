@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import store from '../redux/store'
 import axios from "axios";
-import { getItems, editOneItem, deleteItem, Update, } from "../redux/actions/itemsActions";
+import { getItems, editOneItem, deleteItem, } from "../redux/actions/itemsActions";
 import './Products.css'
 import './DeleteProduct.css'
 
@@ -28,11 +28,11 @@ class Products extends React.Component {
 
 
   componentDidMount() {
-    axios.get("https://mern-app-expensecalculator.herokuapp.com/api/v1/items?align=purchase_date:desc",
+    axios.get("http://localhost:8084/api/v1/items?align=purchase_date:desc",
       { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
       .then(res => {
         store.dispatch(getItems(res.data))
-        // this.setState({ Update: this.props.Update })
+       
 
       })
       .catch(err => {
@@ -42,24 +42,22 @@ class Products extends React.Component {
 
   componentDidUpdate() {
     if (this.state.Update && this.state.align === null) {
-      axios.get("https://mern-app-expensecalculator.herokuapp.com/api/v1/items?sort=purchase_date:desc",
+      axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
         { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
         .then(res => {
           store.dispatch(getItems(res.data))
-          //  store.dispatch(Update(false))
-          // console.log('Update')
+          
         })
         .catch(err => {
           console.log(err)
         })
       this.setState({ Update: false })
     } else if (this.state.align != null) {
-      axios.get(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items?sort=${this.state.align}`,
+      axios.get(`http://localhost:8084/api/v1/items?sort=${this.state.align}`,
         { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
         .then(res => {
           store.dispatch(getItems(res.data))
-          //  store.dispatch(Update(false))
-          // console.log('Update')
+        
         })
         .catch(err => {
           console.log(err)
@@ -99,7 +97,7 @@ class Products extends React.Component {
     })
   }
   onDeleteClick = _id => {
-    axios.delete(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items/${_id}`,
+    axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
       {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -118,17 +116,7 @@ class Products extends React.Component {
   //funkcii za edit product 
 
   doneEdit = (_id) => {
-    // alert('TEST');
-    //  console.log(this.props);
-    //  console.log('***************************************');
-    // console.log(this.props._id,
-    //    this.props.product_name,
-    //    this.props.product_type,
-    //   this.props.product_description,
-    //   this.props.purchase_date,
-    //    this.props.product_price);
-    // console.log('***************************************');
-
+  
     var item = this.props.items.filter((v, i) => {
       if (v._id === _id) {
         return v;
@@ -138,22 +126,10 @@ class Products extends React.Component {
 
     console.log(item[0]);
 
-    //  store.dispatch(
-
     this.props.editOneItem(item[0]);
 
-    //  store.dispatch(true)
-
   }
-  //    edit(e){
-  //      var id=e.target.getAttribute('data-key')
-  //     store.dispatch({
-  //       type:"UPDATE_ITEM",
-  //       id:id
-  //      })
-  //     this.props.history.push('/edit/'+id)
-  //  }
-
+  
 
   render() {
 
@@ -221,11 +197,11 @@ class Products extends React.Component {
     );
   }
 }
-Products.propTypes = {
-  items: React.PropTypes.array.isRequired,
-  item: PropTypes.object.isRequired,
+// Products.propTypes = {
+//   items: React.PropTypes.array.isRequired,
+//   item: PropTypes.object.isRequired,
 
-}
+// }
 
 function mapStateToProps(state) {
   return {

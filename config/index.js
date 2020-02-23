@@ -1,6 +1,6 @@
 const fs = require("fs");
 const configFile = "./config.json";
-var conf = null;
+let conf = null;
 
 const getConfig = section => {
   if (conf == null) {

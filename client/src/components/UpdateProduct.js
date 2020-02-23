@@ -2,9 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import { Update, newItem, editOneItem } from '../redux/actions/itemsActions'
-import { itemsReducer } from '../redux/reducers/itemsReducer'
+//import { itemsReducer } from '../redux/reducers/itemsReducer'
 import './New product.css'
 
 class UpdateProduct extends React.Component {
@@ -36,7 +35,7 @@ class UpdateProduct extends React.Component {
     edit = (event) => {
         event.preventDefault()
         axios.put(
-            `https://mern-app-expensecalculator.herokuapp.com/api/v1/items/${this.props.item._id}`,
+            `http://localhost:8084/api/v1/items/${this.props.item._id}`,
             {
                 product_name: this.state.product_name,
                 product_type: this.state.product_type,

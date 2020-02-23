@@ -8,9 +8,9 @@ api.use(bodyParser.json());
 api.use(cors());
 
 api.use(express.static(path.join(__dirname, '../client/build')));
-// api.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname + '/client/build/index.html'));
-// });
+ //api.get('*', (req, res) => {
+ // res.sendFile(path.resolve(__dirname + '/client/build/index.html'));
+ //});
 api.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });

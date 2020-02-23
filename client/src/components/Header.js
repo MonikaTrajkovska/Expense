@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './Header.css'
 import Profile from './assets/images/profile.png.png'
+import './Header.css'
+
 
 const Header = () => {
     function logout(){

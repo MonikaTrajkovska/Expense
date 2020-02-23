@@ -1,8 +1,8 @@
  const express = require('express');
  const proxy = require('http-proxy');
-const config = require('../config/index.js');
+//const config = require('../config/index.js');
 
-console.log(config.getConfig("db").host);
+//console.log(config.getConfig("db").host);
 
  var api = express();
  var apiProxy = proxy.createProxyServer();

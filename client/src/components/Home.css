@@ -18,34 +18,21 @@ body,html{
   .expenseCalculator{
     text-align: center;
     font-size: 60px;
-    /* margin-left:40px;
-   */
-    /* margin-top: 250px; */
     background:transparent;
     color:    #1DD1A1
   }
   .paragraph{
     display: flex;
     width: 100%;
-  
     align-items: center;
-   
     width: 100%;
     justify-content: flex-start;
     align-items: center;
-    
-    /* margin-left: 50px; */
-    justify-content: space-evenly;
+   justify-content: space-evenly;
     font-size: 25px;
     color:#5cd6d6 ;
 }
   
-  /* .paragraph1{
-      display: flex;
-  }
-  .paragraph2{
-    display: flex;
-} */
 
 .buttons {
     cursor: pointer;

@@ -3,8 +3,6 @@
 .text-field-input{
     font-size: 15px;
     color:  #8D8D8D ;
-    /* margin-left: 50px;
-    padding:50px; */
     margin-bottom: 8.5px;
 }
 .text-field{
@@ -15,7 +13,6 @@
     padding-left: 50px;
     padding-right: 50px;
     margin-top:5px;
-    /* margin-left: 100px; */
     margin-right: 100px;
     border-radius: 5px;
     padding-top: 10px;
@@ -33,11 +30,6 @@
     padding-left: 100px;
     padding-right: 120px;
     margin: 20px 0px 50px 20px;
-    /* margin-left: 120px;
-    margin-right: 100px;
-    margin-top: 10px;
-    margin-bottom: 50px;
-    margin-top: 20px; */
     border-radius: 5px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;

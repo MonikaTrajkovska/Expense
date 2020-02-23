@@ -15,7 +15,6 @@ class Expenses extends React.Component {
         this.state = {
             monthFilter: false,
             yearFilter: true,
-            // toggle: true,
             refilter: null,
             Update: false
         }
@@ -25,7 +24,7 @@ class Expenses extends React.Component {
         this.setState({
             yearFilter: true,
             monthFilter: false,
-            // toggle: true
+           
         })
     }
 
@@ -33,7 +32,7 @@ class Expenses extends React.Component {
         this.setState({
             yearFilter: false,
             monthFilter: true,
-            // toggle: false
+            
         })
     }
 
@@ -45,7 +44,7 @@ class Expenses extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("https://mern-app-expensecalculator.herokuapp.com/api/v1/items?sort=purchase_date:desc",
+        axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
             { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
             .then(res => {
                 store.dispatch(getItems(res.data))
@@ -59,7 +58,7 @@ class Expenses extends React.Component {
         if (this.state.Update) {
             let date = this.state.refilter
             if (date === 'all') {
-                axios.get(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items?sort=purchase_date:desc`,
+                axios.get(`http://localhost:8084/api/v1/items?sort=purchase_date:desc`,
                     { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
                     .then(res => {
                         store.dispatch(getItems(res.data))
@@ -71,7 +70,7 @@ class Expenses extends React.Component {
             } else if (date.length === 4) {
                 let fromDate = new Date(`${date}-01-01 00:00:00.000`).getTime();
                 let toDate = new Date(`${date}-12-31 23:59:59.000`).getTime();
-                axios.get(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
+                axios.get(`http://localhost:8084/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
                     { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
                     .then(res => {
                         store.dispatch(getItems(res.data))
@@ -80,10 +79,10 @@ class Expenses extends React.Component {
                     .catch(err => {
                         console.log(err)
                     })
-            } else {  ///date.length ===7
+            } else { 
                 let fromDate = new Date(`${date}-01 00:00:00.000`).getTime();
                 let toDate = new Date(`${date}-31 23:59:59.000`).getTime();
-                axios.get(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
+                axios.get(`http://localhost:8084/api/v1/items?date_from=${fromDate}&date_to=${toDate}&sort=purchase_date:desc`,
                     { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
                     .then(res => {
                         store.dispatch(getItems(res.data))
@@ -103,21 +102,7 @@ class Expenses extends React.Component {
         for (let i = 0; i < this.props.items.length; i++) {
             totalAmount += this.props.items[i].product_price
         }
-        // Za options na selectbox od Year
-        //  let today = new Date();
-        //  let year = today.getFullYear();
-        // let selectOptions= []
-        // for (let i = 2000; i <= year; i++) {
-
-        // selectOptions.push(<option key={i} value={i}>{i}</option>)
-        //  }
-        //  selectOptions.reverse();
-
-        // let selectOptions=['2000', '2001, '2002', '2003', '2004', '2005', '2006', '2007',
-        //  '2008', '2009', '2010', '2001']
-        // let today= new Date()
-        // let selectOptions=today.getFullYear()
-
+       
 
         return (
             <React.Fragment>
@@ -125,9 +110,9 @@ class Expenses extends React.Component {
                 <h3>Expenses</h3>
                 <div className="expense4">
                     <button className="yearly-btn4" onClick={this.yearFilter}>Yearly</button>
-                    {/* {this.state.toggle ? "yearly-btn4" : "yearly-btn4"}  */}
+                  
                     <button className="monthly-btn4" onClick={this.monthFilter}>MONTHLY</button>
-                    {/* {!this.state.toggle ? "monthly-btn4" : "monthly-btn4"} */}
+                   
                     {this.state.monthFilter ?
                         <p id="box-container">
                             <label htmlFor="filter4">Choose Month </label>

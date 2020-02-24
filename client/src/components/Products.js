@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import store from '../redux/store'
 import axios from "axios";
-import { getItems, editOneItem, deleteItem, } from "../redux/actions/itemsActions";
+import { getItems, editOneItem, deleteItem, Update} from "../redux/actions/itemsActions";
 import './Products.css'
 import './DeleteProduct.css'
 

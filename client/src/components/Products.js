@@ -135,7 +135,7 @@ class Products extends React.Component {
 
   render() {
 
-    let itemsList = null;
+    let itemsList = [];
     if (this.props.items) {
       itemsList = this.props.items && this.props.items.map(item => {
       

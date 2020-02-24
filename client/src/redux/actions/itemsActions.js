@@ -1,8 +1,8 @@
 
-export function getItems(data) {
+export function getItems(items) {
     return {
         type: 'GET_ITEMS',
-        payload: data
+        payload: items
     }
 }
 

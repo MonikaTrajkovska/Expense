@@ -15,7 +15,7 @@ class Products extends React.Component {
     super(props);
     this.state = {
       showModal: null,
-      items: [],
+      items: {},
       filterOption: null,
       Update: false,
       align: null

@@ -32,6 +32,7 @@ class Products extends React.Component {
       { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
       .then(res => {
         store.dispatch(getItems(res.data))
+        this.setState({Update:this.props.Update})
        
 
       })
@@ -46,6 +47,7 @@ class Products extends React.Component {
         { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
         .then(res => {
           store.dispatch(getItems(res.data))
+          store.dispatch(Update(false))
           
         })
         .catch(err => {
@@ -57,7 +59,7 @@ class Products extends React.Component {
         { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
         .then(res => {
           store.dispatch(getItems(res.data))
-        
+          store.dispatch(Update(false))
         })
         .catch(err => {
           console.log(err)

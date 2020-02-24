@@ -1,5 +1,5 @@
 const initialUserState = {
-    items: {},
+    items: [],
     newProduct: false,
     Update: false,
     editItems: {},

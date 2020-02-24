@@ -11,7 +11,7 @@ api.use(express.static(path.join(__dirname, '../client/build')));
  //api.get('*', (req, res) => {
  // res.sendFile(path.resolve(__dirname + '/client/build/index.html'));
  //});
-api.get('*', function (req, res) {
+api.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 

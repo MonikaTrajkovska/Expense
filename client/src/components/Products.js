@@ -33,7 +33,7 @@ class Products extends React.Component {
       .then(res => {
         store.dispatch(getItems(res.data))
         this.setState({Update:this.props.Update})
-       
+        .done();
 
       })
       .catch(err => {

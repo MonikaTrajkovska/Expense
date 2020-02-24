@@ -25,7 +25,7 @@ api.use(function (req, res, next) {
      })
  );
 
-api.get('/api/v1/items', items.getAll);
+api.get('http://localhost:8084/api/v1/items', items.getAll);
 api.get('/api/v1/items/:id', items.getOne);
 api.post('/api/v1/items/', items.save);
 api.put('/api/v1/items/:id', items.replace);

@@ -42,7 +42,7 @@ class NewProduct extends React.Component {
             this.state.purchase_date != null &&
             this.state.product_price != null) {
 
-            axios.post('http://localhost:8084/api/v1/items', {
+            axios.post('https://mern-app-expensecalculator.herokuapp.com/api/v1/items', {
                 product_name: this.state.product_name,
                 product_type: this.state.product_type,
                 product_description: this.state.product_description,

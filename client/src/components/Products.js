@@ -28,7 +28,7 @@ class Products extends React.Component {
 
 
   componentDidMount() {
-    axios.get("http://localhost:8084/api/v1/items?align=purchase_date:desc",
+    axios.get("https://mern-app-expensecalculator.herokuapp.com/api/v1/items?align=purchase_date:desc",
       { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
       .then(res => {
         store.dispatch(getItems(res.data))
@@ -42,7 +42,7 @@ class Products extends React.Component {
 
   componentDidUpdate() {
     if (this.state.Update && this.state.align === null) {
-      axios.get("http://localhost:8084/api/v1/items?sort=purchase_date:desc",
+      axios.get("https://mern-app-expensecalculator.herokuapp.com/api/v1/items?sort=purchase_date:desc",
         { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
         .then(res => {
           store.dispatch(getItems(res.data))
@@ -53,7 +53,7 @@ class Products extends React.Component {
         })
       this.setState({ Update: false })
     } else if (this.state.align != null) {
-      axios.get(`http://localhost:8084/api/v1/items?sort=${this.state.align}`,
+      axios.get(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items?sort=${this.state.align}`,
         { headers: { "Authorization": `Bearer ${localStorage.getItem('jwt')}` } })
         .then(res => {
           store.dispatch(getItems(res.data))
@@ -97,7 +97,7 @@ class Products extends React.Component {
     })
   }
   onDeleteClick = _id => {
-    axios.delete(`http://localhost:8084/api/v1/items/${_id}`,
+    axios.delete(`https://mern-app-expensecalculator.herokuapp.com/api/v1/items/${_id}`,
       {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`

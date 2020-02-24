@@ -15,7 +15,7 @@ class Products extends React.Component {
     super(props);
     this.state = {
       showModal: null,
-      item: [],
+      item: {},
       filterOption: null,
       Update: false,
       align: null
@@ -137,8 +137,8 @@ class Products extends React.Component {
 
     let itemsList = null;
     if (this.props.items) {
-      itemsList = this.props.items.map(item => {
-
+      itemsList = this.props.items && this.props.items.map(item => {
+      
         return (
 
           <tr key={item._id}>

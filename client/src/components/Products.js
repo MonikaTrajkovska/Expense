@@ -197,11 +197,11 @@ class Products extends React.Component {
     );
   }
 }
-// Products.propTypes = {
-//   items: React.PropTypes.array.isRequired,
-//   item: PropTypes.object.isRequired,
+ Products.propTypes = {
+   items: React.PropTypes.array.isRequired,
+  item: PropTypes.object.isRequired,
 
-// }
+ }
 
 function mapStateToProps(state) {
   return {

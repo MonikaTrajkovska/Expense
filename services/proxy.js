@@ -14,7 +14,7 @@
 
 api.all('/api/v1/auth/*', (req, res) => {
     //console.log('Hit on path: /api/v1/auth/*')
-     apiProxy.web(req, res, {target: 'http://localhost:8085'});
+     apiProxy.web(req, res, {target: 'http://localhost:8083'});
  });
 
  api.all('/*', (req, res) => {
@@ -26,7 +26,7 @@ api.all('/api/v1/auth/*', (req, res) => {
 //     res.status(404).send('Not Found!');
 // });
 
- api.listen(process.env.PORT || 8082, err => {
+ api.listen(process.env.PORT, err => {
      if(err){
         console.log('could not start server');
          console.log(err);

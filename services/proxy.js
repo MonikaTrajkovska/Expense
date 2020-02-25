@@ -26,7 +26,7 @@ api.all('/api/v1/auth/*', (req, res) => {
 //     res.status(404).send('Not Found!');
 // });
 
- api.listen(process.env.PORT, err => {
+ api.listen(process.env.PORT || 8082, err => {
      if(err){
         console.log('could not start server');
          console.log(err);

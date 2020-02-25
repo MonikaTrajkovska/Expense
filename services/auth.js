@@ -36,7 +36,7 @@ api.post('/api/v1/auth/reset-password', auth.resetPassword);
 api.post('/api/v1/auth/change-password', auth.changePassword);
 
 
-api.listen(8085, err => {
+api.listen(8087, err => {
     if (err) {
         console.log('Could not start server');
         console.log(err);

@@ -14,7 +14,7 @@
 
 api.all('/api/v1/auth/*', (req, res) => {
     //console.log('Hit on path: /api/v1/auth/*')
-     apiProxy.web(req, res, {target: 'http://localhost:3000'});
+     apiProxy.web(req, res, {target: 'http://localhost:8087'});
  });
 
  api.all('/*', (req, res) => {

@@ -35,12 +35,11 @@ api.post('/api/v1/auth/reset-link', auth.resetLink);
 api.post('/api/v1/auth/reset-password', auth.resetPassword);
 api.post('/api/v1/auth/change-password', auth.changePassword);
 
-
-api.listen(3000, err => {
+api.listen(8087, err => {
     if (err) {
         console.log('Could not start server');
         console.log(err);
         return
     }
-    console.log('Server has started on port 3000');
+    console.log('Server has started on port 8087');
 });

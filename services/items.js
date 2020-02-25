@@ -5,6 +5,7 @@ const jwt = require('express-jwt');
 const config = require('../config/index.js');
 const DBConn = require('../db/connection');
 const items = require('../handlers/items');
+
 const cors = require('cors');
 
 DBConn.init(config.getConfig("db"));

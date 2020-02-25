@@ -19,7 +19,7 @@ api.all('/api/v1/auth/*', (req, res) => {
 
  api.all('/*', (req, res) => {
     // console.log('Hit on path: /api/v1/filmovi/*')
-          apiProxy.web(req, res, {target: 'http://localhost:8082'});
+          apiProxy.web(req, res, {target: 'http://localhost:8081'});
  });
 
 // api.all('/*', (req, res) => {

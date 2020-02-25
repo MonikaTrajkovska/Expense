@@ -9,7 +9,7 @@
 
  api.all('/api/v1/items/*', (req, res) => {
   //  console.log('Hit on path: /api/v1/auth/*')
-    apiProxy.web(req, res, {target: 'http://localhost:8084'});
+    apiProxy.web(req, res, {target: 'http://localhost:8086'});
  });
 
 api.all('/api/v1/auth/*', (req, res) => {

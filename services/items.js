@@ -32,11 +32,11 @@ api.put('/api/v1/items/:id', items.replace);
 api.patch('/api/v1/items/:id', items.update);
 api.delete('/api/v1/items/:id', items.remove);
 
-api.listen(8084, err => {
+api.listen(8086, err => {
     if (err) {
         console.log('could not start server');
         console.log(err);
         return;
     }
-    console.log('server started successfully on port 8084');
+    console.log('server started successfully on port 8086');
 });

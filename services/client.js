@@ -22,7 +22,7 @@ api.get('/*', function (req, res) {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
-api.listen(8082, err => {
+api.listen(8080, err => {
     if(err){
         console.log('could not start server');
         console.log(err);

@@ -1,6 +1,6 @@
  const express = require('express');
- //const proxy = require('http-proxy');
- const proxy = require('http-proxy-middleware')
+ const proxy = require('http-proxy');
+ 
 
 //const config = require('../config/index.js');
 

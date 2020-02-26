@@ -1,5 +1,7 @@
  const express = require('express');
- const proxy = require('http-proxy');
+ //const proxy = require('http-proxy');
+ const proxy = require('http-proxy-middleware')
+
 //const config = require('../config/index.js');
 
 //console.log(config.getConfig("db").host);

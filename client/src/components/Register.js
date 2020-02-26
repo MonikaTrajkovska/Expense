@@ -51,7 +51,7 @@ import './Register.css'
              this.state.password != null
              ) {
              event.preventDefault()
-             axios.post('https://mern-app-expensecalculator.herokuapp.com/api/v1/auth/register', {
+             axios.post('/api/v1/auth/register', {
                  first_name: this.state.first_name,
                  last_name: this.state.last_name,
                  email: this.state.email,
@@ -63,7 +63,7 @@ import './Register.css'
              })
              .then(res => {
                  console.log(res)
-                 axios.post('https://mern-app-expensecalculator.herokuapp.com/api/v1/auth/login', {
+                 axios.post('/api/v1/auth/login', {
                      email: this.state.email,
                      password: this.state.password
                  })

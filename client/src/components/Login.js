@@ -31,7 +31,7 @@ class Login extends React.Component {
 
     login = (event) => {
         event.preventDefault();
-        axios.post('http://127.0.0.1:8087/api/v1/auth/login', {
+        axios.post('https://mern-app-expensecalculator.herokuapp.com/api/v1/auth/login', {
             email: this.state.email,
             password: this.state.password
         })

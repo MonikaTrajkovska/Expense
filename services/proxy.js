@@ -2,7 +2,7 @@
  const proxy = require('http-proxy');
  
 
-
+ 
 //const config = require('../config/index.js');
 
 //console.log(config.getConfig("db").host);
@@ -12,17 +12,17 @@
 
  api.all('/api/v1/items/*', (req, res) => {
   //  console.log('Hit on path: /api/v1/auth/*')
-    apiProxy.web(req, res, {target: 'http://0.0.0.0:8086'});
+    apiProxy.web(req, res, {target: 'http://localhost:8086'});
  });
 
 api.all('/api/v1/auth/*', (req, res) => {
     //console.log('Hit on path: /api/v1/auth/*')
-     apiProxy.web(req, res, {target: 'http://0.0.0.0:8087'});
+     apiProxy.web(req, res, {target: 'http://localhost:8087'});
  });
 
  api.all('/*', (req, res) => {
     // console.log('Hit on path: /api/v1/filmovi/*')
-          apiProxy.web(req, res, {target: 'http://0.0.0.0:8080'});
+          apiProxy.web(req, res, {target: 'http://localhost:8080'});
  });
 
 // api.all('/*', (req, res) => {

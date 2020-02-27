@@ -10,7 +10,8 @@ DBCon.init(config.getConfig('db'));
 
 var api = express();
 api.use(bodyParser.json());
-api.use(cors());
+app.use(cors({origin: true, credentials: true}));
+// api.use(cors());
 api.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");

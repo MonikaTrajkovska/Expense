@@ -75,11 +75,11 @@ import './Register.css'
                   
                  })
                  .catch(err=>{
-                     console.log(err)
+                     console.log(err.response)
                  })
              })
              .catch(err=>{
-                 console.log(err)
+                 console.log(err.response)
              });
          }
      }

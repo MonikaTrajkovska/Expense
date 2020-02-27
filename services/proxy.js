@@ -16,7 +16,7 @@
  });
 
 api.all('/api/v1/auth/*', (req, res) => {
-    //console.log('Hit on path: /api/v1/auth/*')
+    console.log('Hit on path: /api/v1/auth/*')
      apiProxy.web(req, res, {target: 'http://localhost:8087'});
  });
 
@@ -28,8 +28,8 @@ api.all('/api/v1/auth/*', (req, res) => {
 // api.all('/*', (req, res) => {
 //     res.status(404).send('Not Found!');
 // });
-var port = process.env.PORT || 8080;
- api.listen(port, err => {
+
+ api.listen(process.env.PORT, err => {
      if(err){
         console.log('could not start server');
          console.log(err);
